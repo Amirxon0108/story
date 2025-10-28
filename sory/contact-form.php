@@ -1,0 +1,31 @@
+<?php
+session_start();
+require('users.php');
+
+if($_SERVER['REQUEST_METHOD']=== 'POST'){
+    $email =$_POST['email'] ?? '';
+    $message = $_POST['message'] ?? '';
+
+
+
+   if(!empty($email) && !empty($message)){ 
+     $stmt = $conn->prepare("INSERT INTO contact( email,message) VALUES (?,?) ");
+    $stmt->bind_param("ss" , $email,$message);
+   
+   if( $stmt->execute()){
+    $_SESSION['contact_success'] = "Habar muvaffaqiyatli qo'shildi!";
+    header('Location: contact.php');
+   }else{
+
+    $_SESSION['contact_errors'] = "Xatolik yuz berdi: " . $stmt->error;
+    header('Location: contact.php');
+   }
+    
+
+   }
+   $conn-close();
+}
+
+
+
+?>
