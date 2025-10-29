@@ -1,9 +1,15 @@
 <?php
 session_start();
+include("../sory/users.php");
 if(!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true ){
     header('Location: ../login-form.php');
     
 }
+
+$request="SELECT * FROM contact WHERE view=0";
+$views=$conn->query($request)->num_rows;
+
+$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -301,7 +307,7 @@ if(!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true ){
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-envelope fa-fw"></i>
                                 <!-- Counter - Messages -->
-                                <span class="badge badge-danger badge-counter">7</span>
+                                <span class="badge badge-danger badge-counter"><?=$views?></span>
                             </a>
                             <!-- Dropdown - Messages -->
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"

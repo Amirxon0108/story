@@ -18,8 +18,6 @@ $result = $stmt->get_result();
 require('header.php')
 
 ?>
-
-
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
