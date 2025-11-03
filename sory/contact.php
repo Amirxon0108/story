@@ -1,4 +1,5 @@
 <?php
+
 require ('header.php');
 ?>
   <main class="main">
@@ -128,11 +129,7 @@ require ('header.php');
                 </div>
 
 
-                <div class="my-3">
-                  <div class="loading">Loading</div>
-                  <div class="error-message"></div>
-                  <div class="sent-message">Your message has been sent. Thank you!</div>
-                </div>
+                  
 
                 <div class="d-grid">
                   <button type="submit" class="btn-submit">Send Message <i class="bi bi-send-fill ms-2"></i></button>

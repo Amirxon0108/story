@@ -1,4 +1,7 @@
 <?php
+require 'users.php';
+$result = $conn->query("SELECT * FROM posts ORDER BY id DESC");
+
 require 'header.php'
 ?>
 
@@ -27,111 +30,78 @@ require 'header.php'
       </nav>
     </div><!-- End Page Title -->
 
-    <div class="container">
-      <div class="row">
+    
 
-        <div class="col-lg-8">
+        <section id="category-postst" class="category-postst section">
+  <div class="container" data-aos="fade-up" data-aos-delay="100">
+    <div class="row gy-5">
 
-          <!-- Category Postst Section -->
-          <section id="category-postst" class="category-postst section">
+      <?php if ($result && $result->num_rows > 0): ?>
+        <?php while($row = $result->fetch_assoc()): ?>
+          <?php if (!empty($row['image'])): ?>
+            <div class="col-lg-6">
+              <article>
 
-            <div class="container" data-aos="fade-up" data-aos-delay="100">
+                <!-- Post image -->
+                <div class="post-img">
+                  <img src="../uploads/<?= htmlspecialchars($row['image']) ?>" 
+                       alt="<?= htmlspecialchars($row['title']) ?>" 
+                       class="img-fluid" loading="lazy">
+                </div>
 
-              <div class="row gy-5">
+                <!-- Post meta -->
+                <div class="meta-top">
+                  <ul>
+                    <li class="d-flex align-items-center">
+                      <a href="category.php?n_type=<?= urlencode($row['n_type']) ?>">
+                        <?= htmlspecialchars($row['n_type']) ?>
+                      </a>
+                    </li>
+                    <li class="d-flex align-items-center">
+                      <i class="bi bi-dot"></i>
+                      <a href="single-blog.php?id=<?= $row['id'] ?>">
+                        <time datetime="<?= htmlspecialchars($row['created_at']) ?>">
+                          <?= htmlspecialchars($row['created_at']) ?>
+                        </time>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
 
-                <div class="col-lg-6">
-                  <article>
+                <!-- Post title -->
+                <h2 class="title">
+                  <a href="single-blog.php?id=<?= $row['id'] ?>">
+                    <?= htmlspecialchars(substr($row['title'], 0, 80)) ?>...
+                  </a>
+                </h2>
 
-                    <div class="post-img">
-                      <img src="assets/img/blog/blog-post-1.webp" alt="" class="img-fluid">
-                    </div>
+                <!-- Author info -->
+                <div class="author-info d-flex align-items-center mt-3">
+                  <img src="../uploads/<?= htmlspecialchars($row['user_img']) ?>" 
+                       alt="Author" class="rounded-circle" width="40" height="40">
+                  <div class="ms-2">
+                    <span class="fw-bold"><?= htmlspecialchars($row['author_name']) ?></span><br>
+                    <small class="text-muted"><?= htmlspecialchars($row['r_time']) ?> min read</small>
+                  </div>
+                </div>
 
-                    <div class="meta-top">
-                      <ul>
-                        <li class="d-flex align-items-center"><a href="blog-details.html">Sorts</a></li>
-                        <li class="d-flex align-items-center"><i class="bi bi-dot"></i> <a href="blog-details.html"><time datetime="2022-01-01">Jan 1, 2022</time></a></li>
-                      </ul>
-                    </div>
+              </article>
+            </div><!-- End post list item -->
+          <?php endif; ?>
+        <?php endwhile; ?>
+      <?php else: ?>
+        <p class="text-center">Hozircha postlar mavjud emas.</p>
+      <?php endif; ?>
 
-                    <h2 class="title">
-                      <a href="blog-details.html">Dolorum optio tempore voluptas dignissimos</a>
-                    </h2>
+    </div>
+  </div>
+</section>
 
-                  </article>
-                </div><!-- End post list item -->
 
-                <div class="col-lg-6">
 
-                  <article>
+             
 
-                    <div class="post-img">
-                      <img src="assets/img/blog/blog-post-2.webp" alt="" class="img-fluid">
-                    </div>
-
-                    <div class="meta-top">
-                      <ul>
-                        <li class="d-flex align-items-center"><a href="blog-details.html">Fashion</a></li>
-                        <li class="d-flex align-items-center"><i class="bi bi-dot"></i> <a href="blog-details.html"><time datetime="2022-01-01">Jan 1, 2022</time></a></li>
-                      </ul>
-                    </div>
-
-                    <h2 class="title">
-                      <a href="blog-details.html">Nisi magni odit consequatur autem nulla dolorem</a>
-                    </h2>
-
-                  </article>
-
-                </div><!-- End post list item -->
-
-                <div class="col-lg-6">
-
-                  <article>
-
-                    <div class="post-img">
-                      <img src="assets/img/blog/blog-post-3.webp" alt="" class="img-fluid">
-                    </div>
-
-                    <div class="meta-top">
-                      <ul>
-                        <li class="d-flex align-items-center"><a href="blog-details.html">Laws</a></li>
-                        <li class="d-flex align-items-center"><i class="bi bi-dot"></i> <a href="blog-details.html"><time datetime="2022-01-01">Jul 5, 2022</time></a></li>
-                      </ul>
-                    </div>
-
-                    <h2 class="title">
-                      <a href="blog-details.html">Possimus soluta ut id suscipit soluta</a>
-                    </h2>
-
-                  </article>
-
-                </div><!-- End post list item -->
-
-                <div class="col-lg-6">
-
-                  <article>
-
-                    <div class="post-img">
-                      <img src="assets/img/blog/blog-post-4.webp" alt="" class="img-fluid">
-                    </div>
-
-                    <div class="meta-top">
-                      <ul>
-                        <li class="d-flex align-items-center"><a href="blog-details.html">Sorts</a></li>
-                        <li class="d-flex align-items-center"><i class="bi bi-dot"></i> <a href="blog-details.html"><time datetime="2022-01-01">Mar 17, 2022</time></a></li>
-                      </ul>
-                    </div>
-
-                    <h2 class="title">
-                      <a href="blog-details.html">Non rem rerum nam cum quo minus exercitationem.</a>
-                    </h2>
-
-                  </article>
-
-                </div><!-- End post list item -->
-
-              </div><!-- End blog posts list -->
-
-            </div>
+              
 
           </section><!-- /Category Postst Section -->
 
@@ -157,102 +127,7 @@ require 'header.php'
 
         </div>
 
-        <div class="col-lg-4 sidebar">
-
-          <div class="widgets-container">
-
-            <!-- Search Widget -->
-            <div class="search-widget widget-item">
-
-              <h3 class="widget-title">Search</h3>
-              <form action="">
-                <input type="text">
-                <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-              </form>
-
-            </div><!--/Search Widget -->
-
-            <!-- Categories Widget -->
-            <div class="categories-widget widget-item">
-
-              <h3 class="widget-title">Categories</h3>
-              <ul class="mt-3">
-                <li><a href="#">General <span>(25)</span></a></li>
-                <li><a href="#">Lifestyle <span>(12)</span></a></li>
-                <li><a href="#">Travel <span>(5)</span></a></li>
-                <li><a href="#">Design <span>(22)</span></a></li>
-                <li><a href="#">Creative <span>(8)</span></a></li>
-                <li><a href="#">Educaion <span>(14)</span></a></li>
-              </ul>
-
-            </div><!--/Categories Widget -->
-
-            <!-- Recent Posts Widget -->
-            <div class="recent-posts-widget widget-item">
-
-              <h3 class="widget-title">Recent Posts</h3>
-
-              <div class="post-item">
-                <img src="assets/img/blog/blog-post-square-1.webp" alt="" class="flex-shrink-0">
-                <div>
-                  <h4><a href="blog-details.html">Nihil blanditiis at in nihil autem</a></h4>
-                  <time datetime="2020-01-01">Jan 1, 2020</time>
-                </div>
-              </div><!-- End recent post item-->
-
-              <div class="post-item">
-                <img src="assets/img/blog/blog-post-square-2.webp" alt="" class="flex-shrink-0">
-                <div>
-                  <h4><a href="blog-details.html">Quidem autem et impedit</a></h4>
-                  <time datetime="2020-01-01">Jan 1, 2020</time>
-                </div>
-              </div><!-- End recent post item-->
-
-              <div class="post-item">
-                <img src="assets/img/blog/blog-post-square-3.webp" alt="" class="flex-shrink-0">
-                <div>
-                  <h4><a href="blog-details.html">Id quia et et ut maxime similique occaecati ut</a></h4>
-                  <time datetime="2020-01-01">Jan 1, 2020</time>
-                </div>
-              </div><!-- End recent post item-->
-
-              <div class="post-item">
-                <img src="assets/img/blog/blog-post-square-4.webp" alt="" class="flex-shrink-0">
-                <div>
-                  <h4><a href="blog-details.html">Laborum corporis quo dara net para</a></h4>
-                  <time datetime="2020-01-01">Jan 1, 2020</time>
-                </div>
-              </div><!-- End recent post item-->
-
-              <div class="post-item">
-                <img src="assets/img/blog/blog-post-square-5.webp" alt="" class="flex-shrink-0">
-                <div>
-                  <h4><a href="blog-details.html">Et dolores corrupti quae illo quod dolor</a></h4>
-                  <time datetime="2020-01-01">Jan 1, 2020</time>
-                </div>
-              </div><!-- End recent post item-->
-
-            </div><!--/Recent Posts Widget -->
-
-            <!-- Tags Widget -->
-            <div class="tags-widget widget-item">
-
-              <h3 class="widget-title">Tags</h3>
-              <ul>
-                <li><a href="#">App</a></li>
-                <li><a href="#">IT</a></li>
-                <li><a href="#">Business</a></li>
-                <li><a href="#">Mac</a></li>
-                <li><a href="#">Design</a></li>
-                <li><a href="#">Office</a></li>
-                <li><a href="#">Creative</a></li>
-                <li><a href="#">Studio</a></li>
-                <li><a href="#">Smart</a></li>
-                <li><a href="#">Tips</a></li>
-                <li><a href="#">Marketing</a></li>
-              </ul>
-
-            </div><!--/Tags Widget -->
+       
 
           </div>
 

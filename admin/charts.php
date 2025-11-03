@@ -1,25 +1,25 @@
 <?php
 session_start();
 require('../sory/users.php');
-
-
- 
-    $id =9;
-  
-    $message="SELECT * FROM contact WHERE id=$id";
-    $m=$conn->query($message);
-    $a=$m->fetch_assoc();
-    if($a["view"]==0){
-        $view="UPDATE contact SET view=1 WHERE id=$id";
-        if($conn->query($view)==TRUE){
-
-        }
-    }
-
-
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $id = $_POST['id'] ?? '';
+  if (!is_numeric($id)) {
+    echo "Invalid ID";
+    exit;
+}
+    $stmt=$conn->prepare("SELECT * FROM contact WHERE id=?");
+    $stmt->bind_param('i', $id);
+    $stmt->execute();
    
-    
+    $a=$m->fetch_assoc();
+    $stmt->close(); 
+    if ($a && $a["view"] == 0) {
+    $update = $conn->prepare("UPDATE contact SET view = 1 WHERE id = ?");
+    $update->bind_param("i", $id);
+    $update->execute();
+    $update->close();
+}
 
-
-    
-    $conn->close();
+$conn->close();
+}
+?>

@@ -8,7 +8,15 @@ $stmt->execute();
 $result=$stmt->get_result();
 
 $contact=$result->fetch_assoc();
+  
+ if($contact["view"]==0){
+       $update = $conn->prepare("UPDATE contact SET view = 1 WHERE id = ?");
+        $update->bind_param("i", $id);
+        $update->execute();
+        $update->close();
 
+
+        }
 
 ?>
 <!DOCTYPE html>
