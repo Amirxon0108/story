@@ -1,8 +1,28 @@
 <?php
 require 'users.php';
-$result = $conn->query("SELECT * FROM posts ORDER BY id DESC");
 
-require 'header.php'
+$soni=4;
+$page= isset($_GET['page']) ? (int)$_GET['page']:1;
+$start=$soni*($page-1);
+
+$query="SELECT COUNT(*) as total FROM posts";
+
+$n=$conn->query($query)->fetch_assoc();
+
+$totalPages = ceil($n['total'] / $soni);
+$links= "";
+for ($i = 1; $i <= $totalPages; $i++) {
+    if ($i == $page) {
+        $links .= "<li class='active'><a href='category.php?page=$i'>$i</a></li>";
+    } else {
+        $links .= "<li class='active' ><a href='category.php?page=$i'>$i</a></li>";
+    }
+}
+$result = $conn->query("SELECT * FROM posts ORDER BY id DESC LIMIT $start, $soni ");
+              
+
+require 'header.php';
+
 ?>
 
 
@@ -110,16 +130,21 @@ require 'header.php'
 
             <div class="container">
               <div class="d-flex justify-content-center">
-                <ul>
-                  <li><a href="#"><i class="bi bi-chevron-left"></i></a></li>
-                  <li><a href="#">1</a></li>
-                  <li><a href="#" class="active">2</a></li>
-                  <li><a href="#">3</a></li>
-                  <li><a href="#">4</a></li>
-                  <li>...</li>
-                  <li><a href="#">10</a></li>
-                  <li><a href="#"><i class="bi bi-chevron-right"></i></a></li>
-                </ul>
+               <ul class="pagination">
+    <li>
+        <a href="category.php?page=<?= ($page > 1) ? $page - 1 : 1 ?>">
+            <i class="bi bi-chevron-left"></i>
+        </a>
+    </li>
+
+    <?= $links ?>
+
+    <li>
+        <a href="category.php?page=<?= ($page < $totalPages) ? $page + 1 : $totalPages ?>">
+            <i class="bi bi-chevron-right"></i>
+        </a>
+    </li>
+</ul>
               </div>
             </div>
 

@@ -3,13 +3,28 @@
 
 
 require('../sory/users.php');
+$soni=1;
+$page= isset($_GET['page']) ? (int)$_GET['page']:1;
+$start=$soni*($page-1);
+
+$query="SELECT COUNT(*) as total FROM contact";
+
+$n=$conn->query($query)->fetch_assoc();
+
+$totalPages = ceil($n['total'] / $soni);
+$links= "";
+for ($i = 1; $i <= $totalPages; $i++) {
+    if ($i == $page) {
+        $links .= "<li class='active'><a href='contact.php?page=$i'>$i</a></li>";
+    } else {
+        $links .= "<li  ><a href='contact.php?page=$i'>$i</a></li>";
+    }
+}
+$result = $conn->query("SELECT * FROM contact ORDER BY id DESC LIMIT $start, $soni ");
+              
 
 
-
-    $stmt = $conn->prepare("SELECT * FROM contact ORDER BY id DESC");
-$stmt->execute();
-$result = $stmt->get_result();      
-
+   
 
 ?>  
 
@@ -18,6 +33,8 @@ $result = $stmt->get_result();
 require('header.php')
 
 ?>
+
+    
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
@@ -93,10 +110,33 @@ require('header.php')
                             </div>
                         </div>
                     </div>
+<!-- Pagination 2 Section -->
+          <section id="pagination-2" class="pagination-2 section">
 
+            <div class="container">
+              <div class="d-flex justify-content-center">
+               <ul class="pagination">
+    <li>
+        <a href="category.php?page=<?= ($page > 1) ? $page - 1 : 1 ?>">
+            <i class="bi bi-chevron-left"></i>
+        </a>
+    </li>
+
+    <?= $links ?>
+
+    <li>
+        <a href="category.php?page=<?= ($page < $totalPages) ? $page + 1 : $totalPages ?>">
+            <i class="bi bi-chevron-right"></i>
+        </a>
+    </li>
+</ul>
+              </div>
+            </div>
+
+          </section><!-- /Pagination 2 Section -->  
                 </div>
                 <!-- /.container-fluid -->
-
+ 
             </div>
             <!-- End of Main Content -->
 
