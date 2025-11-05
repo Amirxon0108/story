@@ -82,6 +82,82 @@ session_start();
       background: #c82333;
       color: #fff;
     }
+   
+/* Umumiy nav bar stil */
+
+/* Mobil toggle icon */
+.mobile-nav-toggle {
+  display: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* Ijtimoiy linklar */
+.header-social-links {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.header-social-links a {
+  color: #333;
+  font-size: 18px;
+  transition: color 0.3s ease;
+}
+
+.header-social-links a:hover {
+  color: #007bff;
+}
+
+/* Kategoriya bo‘limi */
+.category-links ul {
+  display: flex;
+  gap: 15px;
+  list-style: none;
+  padding: 0;
+  margin: 15px 0;
+  flex-wrap: wrap;
+}
+
+.category-links ul li a {
+  text-decoration: none;
+  color: #555;
+  font-weight: 500;
+  padding: 6px 10px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  background-color: #f0f0f0;
+}
+
+.category-links ul li a:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+
+/* ========================
+   Responsive (mobil)
+   ======================== */
+@media (max-width: 768px) {
+  .navmenu ul {
+    flex-direction: column;
+    display: none; /* default hidden */
+    width: 100%;
+  }
+
+  .navmenu ul.show {
+    display: flex;
+  }
+
+  .mobile-nav-toggle {
+    display: block;
+  }
+
+  .category-links ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
   </style>
 </head>
 
@@ -115,3 +191,12 @@ session_start();
       
     </div>
   </header>
+  <div class="category-links" style="margin-top: 10px;">
+  <ul style="display: flex; gap: 15px; list-style: none; padding: 0;">
+    <li><a href="iqtisodiyot.php">Iqtisodiyot</a></li>
+    <li><a href="jahon.php">Jahon</a></li>
+    <li><a href="bisnes.php">Bisnes</a></li>
+    <li><a href="jamiyat.php">Jamiyat</a></li>
+    <li><a href="moliya.php">Moliya</a></li>
+  </ul>
+</div>

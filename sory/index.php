@@ -178,9 +178,9 @@ $result = $conn->query("SELECT * FROM posts ORDER BY id DESC");
         <div class="swiper-slide">
           <article class="blog-card">
             <div class="blog-image position-relative">  
-              <img src="../uploads/<?= htmlspecialchars($row['image']) ?>" 
-                   alt="<?= htmlspecialchars($row['title']) ?>" 
-                   loading="lazy">
+              <img src="../uploads/<?= htmlspecialchars($row['image']) ?>  " 
+                   alt="<?= htmlspecialchars($row['title']) ?>  "
+                   loading="lazy"  >
               <div class="category-badge"><?= htmlspecialchars($row['n_type'])?></div>
             </div>
 
@@ -193,7 +193,7 @@ $result = $conn->query("SELECT * FROM posts ORDER BY id DESC");
                 </div>
               </div>
 
-              <h3><a href="#"><?= htmlspecialchars(substr($row['title'],0,80)) ?></a>...</h3>
+              <h3> <a href="single-blog.php?id=<?= $row['id'] ?>"> <?= htmlspecialchars(substr($row['title'],0,80)) ?></a>...</h3>
               <p><?= (nl2br(htmlspecialchars(substr($row['content'],0,100)))) ?>...</p>
 
               <div class="blog-footer">

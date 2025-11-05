@@ -1,168 +1,156 @@
 <?php
 require 'users.php';
 
-$soni=4;
-$page= isset($_GET['page']) ? (int)$_GET['page']:1;
-$start=$soni*($page-1);
+$soni = 6;
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$start = $soni * ($page - 1);
 
-$query="SELECT COUNT(*) as total FROM posts";
-
-$n=$conn->query($query)->fetch_assoc();
+// Umumiy postlar soni
+$query = "SELECT COUNT(*) as total FROM posts";
+$n = $conn->query($query)->fetch_assoc();
 
 $totalPages = ceil($n['total'] / $soni);
-$links= "";
+
+// Pagination linklarini tayyorlash
+$links = "";
 for ($i = 1; $i <= $totalPages; $i++) {
-    if ($i == $page) {
-        $links .= "<li class='active'><a href='category.php?page=$i'>$i</a></li>";
-    } else {
-        $links .= "<li class='active' ><a href='category.php?page=$i'>$i</a></li>";
-    }
+    $active = ($i == $page) ? "active" : "";
+    $links .= "<li class='$active'><a href='category.php?page=$i'>$i</a></li>";
 }
-$result = $conn->query("SELECT * FROM posts ORDER BY id DESC LIMIT $start, $soni ");
-              
+
+$result = $conn->query("SELECT * FROM posts ORDER BY id DESC LIMIT $start, $soni");
 
 require 'header.php';
-
 ?>
+<style>
+.post-img {
+  width: 100%;
+  height: 250px; /* Har bir rasmning balandligi */
+  overflow: hidden;
+  border-radius: 12px;
+  position: relative;
+}
+
+.post-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Rasmni bir xil shaklda kesadi */
+  transition: transform 0.3s ease;
+}
+
+.post-img img:hover {
+  transform: scale(1.05);
+}
+
+.category-badge {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
 
 
-  <main class="main">
+</style>
 
-    <!-- Page Title -->
-    <div class="page-title">
-      <div class="heading">
-        <div class="container">
-          <div class="row d-flex justify-content-center text-center">
-            <div class="col-lg-8">
-              <h1 class="heading-title">Blog Category</h1>
-              <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.</p>
-            </div>
-          </div>
-        </div>
+<main class="main">
+
+  <!-- Page Title -->
+  <div class="page-title">
+    <div class="heading">
+      <div class="container text-center">
+        <h1 class="heading-title">Eng So‘ngi Yangiliklar</h1>
+        <p class="mb-0">Saytimizdagi eng so‘nggi texnologik yangiliklar bilan tanishing.</p>
       </div>
-      <nav class="breadcrumbs">
-        <div class="container">
-          <ol>
-            <li><a href="index.php">Home</a></li>
-            <li class="current">Category</li>
-          </ol>
-        </div>
-      </nav>
-    </div><!-- End Page Title -->
+    </div>
+    <nav class="breadcrumbs">
+      <div class="container">
+        <ol>
+          <li><a href="index.php">Bosh sahifa</a></li>
+          <li class="current">Yangiliklar</li>
+        </ol>
+      </div>
+    </nav>
+  </div>
+  <!-- End Page Title -->
 
-    
+  <!-- Category Section -->
+  <section id="category-postst" class="category-postst section">
+    <div class="container" data-aos="fade-up" data-aos-delay="100">
+      <div class="row gy-5">
 
-        <section id="category-postst" class="category-postst section">
-  <div class="container" data-aos="fade-up" data-aos-delay="100">
-    <div class="row gy-5">
+        <?php if ($result && $result->num_rows > 0): ?>
+          <?php while ($row = $result->fetch_assoc()): ?>
+            <?php if (!empty($row['image'])): ?>
+              <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
 
-      <?php if ($result && $result->num_rows > 0): ?>
-        <?php while($row = $result->fetch_assoc()): ?>
-          <?php if (!empty($row['image'])): ?>
-            <div class="col-lg-6">
-              <article>
+                <article class="post-card">
 
-                <!-- Post image -->
-                <div class="post-img">
-                  <img src="../uploads/<?= htmlspecialchars($row['image']) ?>" 
-                       alt="<?= htmlspecialchars($row['title']) ?>" 
-                       class="img-fluid" loading="lazy">
-                </div>
+                  <!-- Post image -->
+                  <div class="post-img position-relative">
+                    <img src="../uploads/<?= htmlspecialchars($row['image']) ?>" 
+                         alt="<?= htmlspecialchars($row['title']) ?>" 
+                         class="img-fluid" loading="lazy">
 
-                <!-- Post meta -->
-                <div class="meta-top">
-                  <ul>
-                    <li class="d-flex align-items-center">
-                      <a href="category.php?n_type=<?= urlencode($row['n_type']) ?>">
-                        <?= htmlspecialchars($row['n_type']) ?>
-                      </a>
-                    </li>
-                    <li class="d-flex align-items-center">
-                      <i class="bi bi-dot"></i>
-                      <a href="single-blog.php?id=<?= $row['id'] ?>">
+                    <div class="category-badge position-absolute top-0 start-0 bg-primary text-white px-2 py-1 rounded-end">
+                      <?= htmlspecialchars($row['n_type']) ?>
+                    </div>
+                  </div>
+
+                  <!-- Post meta -->
+                  <div class="meta-top mt-2">
+                    <ul class="list-inline mb-1">
+                      <li class="list-inline-item">
+                        <span class="views">2.7k views</span>
+                      </li>
+                      <li class="list-inline-item">
+                        <i class="bi bi-dot"></i>
                         <time datetime="<?= htmlspecialchars($row['created_at']) ?>">
                           <?= htmlspecialchars($row['created_at']) ?>
                         </time>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-
-                <!-- Post title -->
-                <h2 class="title">
-                  <a href="single-blog.php?id=<?= $row['id'] ?>">
-                    <?= htmlspecialchars(substr($row['title'], 0, 80)) ?>...
-                  </a>
-                </h2>
-
-                <!-- Author info -->
-                <div class="author-info d-flex align-items-center mt-3">
-                  <img src="../uploads/<?= htmlspecialchars($row['user_img']) ?>" 
-                       alt="Author" class="rounded-circle" width="40" height="40">
-                  <div class="ms-2">
-                    <span class="fw-bold"><?= htmlspecialchars($row['author_name']) ?></span><br>
-                    <small class="text-muted"><?= htmlspecialchars($row['r_time']) ?> min read</small>
+                      </li>
+                    </ul>
                   </div>
-                </div>
 
-              </article>
-            </div><!-- End post list item -->
-          <?php endif; ?>
-        <?php endwhile; ?>
-      <?php else: ?>
-        <p class="text-center">Hozircha postlar mavjud emas.</p>
-      <?php endif; ?>
+                  <!-- Post title -->
+                  <h2 class="title">
+                    <a href="single-blog.php?id=<?= $row['id'] ?>">
+                      <?= htmlspecialchars(substr($row['title'], 0, 80)) ?>...
+                    </a>
+                  </h2>
 
-    </div>
-  </div>
-</section>
+                  <!-- Author info -->
+                  <div class="author-info d-flex align-items-center mt-3">
+                    <img src="../uploads/<?= htmlspecialchars($row['user_img']) ?>" 
+                         alt="Author" class="rounded-circle" width="40" height="40">
+                    <div class="ms-2">
+                      <span class="fw-bold"><?= htmlspecialchars($row['author_name']) ?></span><br>
+                      <small class="text-muted"><?= htmlspecialchars($row['r_time']) ?> min o‘qish</small>
+                    </div>
+                  </div>
 
-
-
-             
-
-              
-
-          </section><!-- /Category Postst Section -->
-
-          <!-- Pagination 2 Section -->
-          <section id="pagination-2" class="pagination-2 section">
-
-            <div class="container">
-              <div class="d-flex justify-content-center">
-               <ul class="pagination">
-    <li>
-        <a href="category.php?page=<?= ($page > 1) ? $page - 1 : 1 ?>">
-            <i class="bi bi-chevron-left"></i>
-        </a>
-    </li>
-
-    <?= $links ?>
-
-    <li>
-        <a href="category.php?page=<?= ($page < $totalPages) ? $page + 1 : $totalPages ?>">
-            <i class="bi bi-chevron-right"></i>
-        </a>
-    </li>
-</ul>
+                </article>
               </div>
-            </div>
-
-          </section><!-- /Pagination 2 Section -->
-
-        </div>
-
-       
-
-          </div>
-
-        </div>
+            <?php endif; ?>
+          <?php endwhile; ?>
+        <?php else: ?>
+          <p class="text-center">Hozircha postlar mavjud emas.</p>
+        <?php endif; ?>
 
       </div>
     </div>
+  </section>
 
-  </main>
+  <!-- Pagination Section -->
+  <section id="pagination-2" class="pagination-2 section">
+    <div class="container">
+      <div class="d-flex justify-content-center">
+        <ul class="pagination">
+          <li><a href="category.php?page=<?= ($page > 1) ? $page - 1 : 1 ?>"><i class="bi bi-chevron-left"></i></a></li>
+          <?= $links ?>
+          <li><a href="category.php?page=<?= ($page < $totalPages) ? $page + 1 : $totalPages ?>"><i class="bi bi-chevron-right"></i></a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
-  <?php
-require 'footer.php'
-  ?>
+</main>
+
+<?php require 'footer.php'; ?>
