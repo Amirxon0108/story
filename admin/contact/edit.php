@@ -1,5 +1,5 @@
 <?php
-session_start();
+    
 require('../../sory/users.php');
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){

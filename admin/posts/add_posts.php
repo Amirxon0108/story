@@ -50,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             exit;
         }
     }
-
+ 
    
     $stmt = $conn->prepare("INSERT INTO posts (title, content, image, user_img, author_name, r_time, n_type) VALUES (?,?, ?, ?, ?, ?, ?)");
     $stmt->bind_param("sssssss", $title, $content, $seve_name, $user_img, $author_name, $r_time,$maqola);

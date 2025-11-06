@@ -5,9 +5,21 @@
  
 require 'users.php';
 $result = $conn->query("SELECT * FROM posts ORDER BY id DESC");
+$res = $conn->query("SELECT * FROM posts WHERE id IN (30,31,32,33,34)");
 
 
 ?>
+<style>
+h1 a {
+  color: #ffffff; /* asosiy rang oq */
+  text-decoration: none;
+  transition: color 0.3s; /* rang yumshoq o'zgarishi */
+}
+
+h1 a:hover {
+  color: #007bff; /* hover rang ko‘k */
+}
+</style>
   <main class="main">
 
     <!-- Blog Hero Section -->
@@ -32,99 +44,44 @@ $result = $conn->query("SELECT * FROM posts ORDER BY id DESC");
             }
           </script>
 
-          
+      
           <div class="swiper-wrapper">
-
-            <div class="swiper-slide">
+           
+              <?php if($res && $res->num_rows > 0) :?>
+                  <?php while ($row = $res->fetch_assoc()):?>
+                  <?php if (!empty($row['image'])):?>
+                     <div class="swiper-slide">
               <div class="blog-hero-item">
-                <img src="assets/img/blog/blog-hero-1.webp" alt="Blog Hero Image" class="img-fluid">
+                <img src="../uploads/<?= $row['image'] ?>" alt="Blog Hero Image" class="img-fluid">
                 <div class="blog-hero-content">
-                  <span class="category">Lifestyle</span>
-                  <h1>5 Efficient Rules How to Organize Working Place Relationship</h1>
-                  <div class="meta">
-                    <span class="author">BY <a href="#">Dary Smith</a></span>
-                    <span class="date">02 Jan, 2024</span>
-                    <span class="read-time">3 Minute Read</span>
-                    <span class="views">1.9k views</span>
+                  
+                 
+                  <span class="category"><?= htmlspecialchars($row['n_type'])?></span>
+                 <h1>
+  <a href="single-blog.php?id=<?= $row['id'] ?>">
+    <?= htmlspecialchars(substr($row['title'],0,100)) ?>
+  </a>
+</h1> <div class="meta">
+                    <span class="author">BY <a href="author-profile.php"><?= htmlspecialchars($row['author_name'])?></a></span>
+                    <span class="date"><?= date('j M , Y' ,strtotime($row['created_at'])) ?></span>
+                    <span class="read-time"><i class="bi bi-clock"></i> <?= htmlspecialchars($row['r_time'])?>  daqiqa o‘qiladi</span>
+                    <span class="views"><i class="bi bi-eye"></i> <?= htmlspecialchars($row['views'])?></span>
                   </div>
-                  <a href="blog-details.php" class="read-more">Continue Reading <i class="bi bi-arrow-right"></i></a>
+                  <a href="single-blog.php?id=<?= $row['id'] ?>" class="read-more">Continue Reading <i class="bi bi-arrow-right"></i></a>
                 </div>
-              </div>
-            </div><!-- End slide item -->
-
-            <div class="swiper-slide">
-              <div class="blog-hero-item">
-                <img src="assets/img/blog/blog-hero-2.webp" alt="Blog Hero Image" class="img-fluid">
-                <div class="blog-hero-content">
-                  <span class="category">Business</span>
-                  <h1>The Future of Remote Work and Digital Transformation</h1>
-                  <div class="meta">
-                    <span class="author">BY <a href="#">Mark Johnson</a></span>
-                    <span class="date">12 Jan, 2024</span>
-                    <span class="read-time">4 Minute Read</span>
-                    <span class="views">2.3k views</span>
-                  </div>
-                  <a href="blog-details.php" class="read-more">Continue Reading <i class="bi bi-arrow-right"></i></a>
-                </div>
-              </div>
-            </div><!-- End slide item -->
-
-            <div class="swiper-slide">
-              <div class="blog-hero-item">
-                <img src="assets/img/blog/blog-hero-3.webp" alt="Blog Hero Image" class="img-fluid">
-                <div class="blog-hero-content">
-                  <span class="category">Technology</span>
-                  <h1>Artificial Intelligence in Modern Business Applications</h1>
-                  <div class="meta">
-                    <span class="author">BY <a href="#">Sarah Williams</a></span>
-                    <span class="date">10 Jan, 2024</span>
-                    <span class="read-time">5 Minute Read</span>
-                    <span class="views">3.1k views</span>
-                  </div>
-                  <a href="blog-details.php" class="read-more">Continue Reading <i class="bi bi-arrow-right"></i></a>
-                </div>
-              </div>
-            </div><!-- End slide item -->
-
-            <div class="swiper-slide">
-              <div class="blog-hero-item">
-                <img src="assets/img/blog/blog-hero-4.webp" alt="Blog Hero Image" class="img-fluid">
-                <div class="blog-hero-content">
-                  <span class="category">Leadership</span>
-                  <h1>Building High-Performance Teams in a Digital Age</h1>
-                  <div class="meta">
-                    <span class="author">BY <a href="#">David Chen</a></span>
-                    <span class="date">8 Jan, 2024</span>
-                    <span class="read-time">4 Minute Read</span>
-                    <span class="views">2.7k views</span>
-                  </div>
-                  <a href="blog-details.php" class="read-more">Continue Reading <i class="bi bi-arrow-right"></i></a>
-                </div>
-              </div>
-            </div><!-- End slide item -->
-
-            <div class="swiper-slide">
-              <div class="blog-hero-item">
-                <img src="assets/img/blog/blog-hero-5.webp" alt="Blog Hero Image" class="img-fluid">
-                <div class="blog-hero-content">
-                  <span class="category">Innovation</span>
-                  <h1>Sustainable Business Practices for the Modern Enterprise</h1>
-                  <div class="meta">
-                    <span class="author">BY <a href="#">Emma Davis</a></span>
-                    <span class="date">6 Jan, 2024</span>
-                    <span class="read-time">3 Minute Read</span>
-                    <span class="views">2.5k views</span>
-                  </div>
-                  <a href="blog-details.php" class="read-more">Continue Reading <i class="bi bi-arrow-right"></i></a>
-                </div>
-              </div>
+              </div></div>
+               <?php endif; ?>
+    <?php endwhile; ?>
+  <?php else: ?>
+    <p class="text-center">Hozircha postlar mavjud emas.</p>
+  <?php endif; ?>
             </div><!-- End slide item -->
 
           </div>
 
           <div class="swiper-button-prev"></div>
           <div class="swiper-button-next"></div>
-
+           <div class="swiper-pagination"></div>
         </div>
 
       </div>
@@ -136,8 +93,8 @@ $result = $conn->query("SELECT * FROM posts ORDER BY id DESC");
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
-        <span class="description-title">Featured Posts</span>
-        <h2>Featured Posts</h2>
+        <span class="description-title">Eng so'ngi malumotlar</span>
+        <h2>Eng so'ngi malumotlar </h2>
         <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
       </div><!-- End Section Title -->
 
@@ -188,18 +145,18 @@ $result = $conn->query("SELECT * FROM posts ORDER BY id DESC");
               <div class="author-info">
                 <img src="../uploads/<?= htmlspecialchars($row['user_img']) ?>" alt="Author" class="author-avatar">
                 <div class="author-details">
-                  <span class="author-name"><?= htmlspecialchars($row['author_name']) ?></span><br>
-                  <span class="publish-date">🕓 <?= htmlspecialchars($row['created_at'] ?? '') ?></span>
+                  <span class="author-name"><?= htmlspecialchars($row['author_name']) ?></span> 
+                      <span class="views"><i class="bi bi-eye"></i> <?= $row['views'] ?>  </span> <span class="publish-date">🕓 <?= date('j M, Y', strtotime($row['created_at'])) ?></span>
                 </div>
               </div>
 
-              <h3> <a href="single-blog.php?id=<?= $row['id'] ?>"> <?= htmlspecialchars(substr($row['title'],0,80)) ?></a>...</h3>
-              <p><?= (nl2br(htmlspecialchars(substr($row['content'],0,100)))) ?>...</p>
+              <h3> <a href="single-blog.php?id=<?= $row['id'] ?>"> <?= htmlspecialchars(substr($row['title'],0,80)) ?>...</a></h3>
+              <p><?= (htmlspecialchars(substr($row['content'],0,100))) ?>...</p>
 
               <div class="blog-footer">
                 <div class="reading-time">
                   <i class="bi bi-clock"></i>
-                  <span><?= htmlspecialchars($row['r_time'])?> min read</span>
+                  <span><i></i><?= htmlspecialchars($row['r_time'])?> daqiqa o‘qiladi</span>
                 </div>
                 <form action="category.php" method="POST">
                   <a href="single-blog.php?id=<?= $row['id'] ?>" class="btn-read-more">

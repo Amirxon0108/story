@@ -5,13 +5,13 @@ $soni = 6;
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $start = $soni * ($page - 1);
 
-// Umumiy postlar soni
+
 $query = "SELECT COUNT(*) as total FROM posts";
 $n = $conn->query($query)->fetch_assoc();
 
 $totalPages = ceil($n['total'] / $soni);
 
-// Pagination linklarini tayyorlash
+
 $links = "";
 for ($i = 1; $i <= $totalPages; $i++) {
     $active = ($i == $page) ? "active" : "";
@@ -25,18 +25,17 @@ require 'header.php';
 <style>
 .post-img {
   width: 100%;
-  height: 250px; /* Har bir rasmning balandligi */
+  height: 200px;
   overflow: hidden;
-  border-radius: 12px;
-  position: relative;
+  border-radius: 10px;
 }
 
 .post-img img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Rasmni bir xil shaklda kesadi */
-  transition: transform 0.3s ease;
+  object-fit: cover;
 }
+
 
 .post-img img:hover {
   transform: scale(1.05);
@@ -71,72 +70,75 @@ require 'header.php';
   </div>
   <!-- End Page Title -->
 
-  <!-- Category Section -->
-  <section id="category-postst" class="category-postst section">
-    <div class="container" data-aos="fade-up" data-aos-delay="100">
-      <div class="row gy-5">
+ <!-- Category Section -->
+<section id="category-postst" class="category-postst section">
+  <div class="container" data-aos="fade-up" data-aos-delay="100">
 
-        <?php if ($result && $result->num_rows > 0): ?>
-          <?php while ($row = $result->fetch_assoc()): ?>
-            <?php if (!empty($row['image'])): ?>
-              <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+    <?php if ($result && $result->num_rows > 0): ?>
+      <!-- faqat 1 marta row ochamiz -->
+      <div class="row gy-4 row-cols-2 row-cols-md-2 row-cols-lg-3">
 
-                <article class="post-card">
+        <?php while ($row = $result->fetch_assoc()): ?>
+          <?php if (!empty($row['image'])): ?>
+            <div class="col d-flex align-items-stretch">
+              <article class="post-card">
 
-                  <!-- Post image -->
-                  <div class="post-img position-relative">
-                    <img src="../uploads/<?= htmlspecialchars($row['image']) ?>" 
-                         alt="<?= htmlspecialchars($row['title']) ?>" 
-                         class="img-fluid" loading="lazy">
+                <!-- Post image -->
+                <div class="post-img position-relative">
+                  <img src="../uploads/<?= htmlspecialchars($row['image']) ?>" 
+                       alt="<?= htmlspecialchars($row['title']) ?>" 
+                       class="img-fluid" loading="lazy">
 
-                    <div class="category-badge position-absolute top-0 start-0 bg-primary text-white px-2 py-1 rounded-end">
-                      <?= htmlspecialchars($row['n_type']) ?>
-                    </div>
+                  <div class="category-badge position-absolute top-0 start-0 bg-primary text-white px-2 py-1 rounded-end">
+                    <?= htmlspecialchars($row['n_type']) ?>
                   </div>
+                </div>
 
-                  <!-- Post meta -->
-                  <div class="meta-top mt-2">
-                    <ul class="list-inline mb-1">
-                      <li class="list-inline-item">
-                        <span class="views">2.7k views</span>
-                      </li>
-                      <li class="list-inline-item">
-                        <i class="bi bi-dot"></i>
-                        <time datetime="<?= htmlspecialchars($row['created_at']) ?>">
-                          <?= htmlspecialchars($row['created_at']) ?>
-                        </time>
-                      </li>
-                    </ul>
+                <!-- Post meta -->
+                <div class="meta-top mt-2">
+                  <ul class="list-inline mb-1">
+                    <li class="list-inline-item">
+                 <span class="views"><i class="bi bi-eye"></i> <?= $row['views'] ?> views</span>
+                    </li>
+                    <li class="list-inline-item">
+                      <i class="bi bi-dot"></i>
+                      <time datetime="<?= date('j M,Y',strtotime($row['created_at'])) ?>">
+                        <?= date('j M , Y',strtotime($row['created_at'])) ?>
+                      </time>
+                    </li>
+                  </ul>
+                </div>
+
+                <!-- Post title -->
+                <h2 class="title">
+                  <a href="single-blog.php?id=<?= $row['id'] ?>">
+                    <?= htmlspecialchars(substr($row['title'], 0, 80)) ?>...
+                  </a>
+                </h2>
+
+                <!-- Author info -->
+                <div class="author-info d-flex align-items-center mt-3">
+                  <img src="../uploads/<?= htmlspecialchars($row['user_img']) ?>" 
+                       alt="Author" class="rounded-circle" width="40" height="40">
+                  <div class="ms-2">
+                   <a href="author-profile.php"> <span class="fw-bold"><?= htmlspecialchars($row['author_name']) ?></span><br></a> 
+                    <small class="text-muted"><?= htmlspecialchars($row['r_time']) ?> min o‘qish</small>
                   </div>
+                </div>
 
-                  <!-- Post title -->
-                  <h2 class="title">
-                    <a href="single-blog.php?id=<?= $row['id'] ?>">
-                      <?= htmlspecialchars(substr($row['title'], 0, 80)) ?>...
-                    </a>
-                  </h2>
+              </article>
+            </div>
+          <?php endif; ?>
+        <?php endwhile; ?>
 
-                  <!-- Author info -->
-                  <div class="author-info d-flex align-items-center mt-3">
-                    <img src="../uploads/<?= htmlspecialchars($row['user_img']) ?>" 
-                         alt="Author" class="rounded-circle" width="40" height="40">
-                    <div class="ms-2">
-                      <span class="fw-bold"><?= htmlspecialchars($row['author_name']) ?></span><br>
-                      <small class="text-muted"><?= htmlspecialchars($row['r_time']) ?> min o‘qish</small>
-                    </div>
-                  </div>
+      </div> <!-- row tugadi -->
+    <?php else: ?>
+      <p class="text-center">Hozircha postlar mavjud emas.</p>
+    <?php endif; ?>
 
-                </article>
-              </div>
-            <?php endif; ?>
-          <?php endwhile; ?>
-        <?php else: ?>
-          <p class="text-center">Hozircha postlar mavjud emas.</p>
-        <?php endif; ?>
+  </div>
+</section>
 
-      </div>
-    </div>
-  </section>
 
   <!-- Pagination Section -->
   <section id="pagination-2" class="pagination-2 section">

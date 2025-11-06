@@ -12,7 +12,6 @@ $old = $_POST['password'] ?? '';
 $new = $_POST['newpassword'] ?? '';
 $confirm = $_POST['confirmnewpassword'] ?? '';
 
-// Xatolikni tekshirish
 if (empty($old) || empty($new) || empty($confirm)) {
     header("Location: change_password.php?msg=Maydonlar to‘liq emas&type=error");
     exit;
@@ -23,7 +22,6 @@ if ($new !== $confirm) {
     exit;
 }
 
-// Eski parol to‘g‘riligini tekshirish
 $stmt = $conn->prepare("SELECT parol FROM users WHERE id=?");
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
@@ -36,13 +34,11 @@ if ($result->num_rows === 0) {
 
 $row = $result->fetch_assoc();
 
-// Parolni tekshirish
-if (!password_verify($old, $row['password'])) {
+if (!password_verify($old, $row['parol'])) {
     header("Location: change_password.php?msg=Joriy parol noto‘g‘ri&type=error");
     exit;
 }
 
-// Yangi parolni xeshlash va bazaga yozish
 $new_hash = password_hash($new, PASSWORD_DEFAULT);
 $update = $conn->prepare("UPDATE users SET parol=? WHERE id=?");
 $update->bind_param("si", $new_hash, $user_id);

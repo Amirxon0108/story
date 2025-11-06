@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("../sory/users.php");
+require __DIR__ . '/../sory/users.php';
 if(!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true ){
     header('Location: ../login-form.php');
     

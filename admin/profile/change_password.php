@@ -4,6 +4,8 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     header("Location: login-form.php");
     exit;
 }
+// $id=$_POST['id'] ?? '';
+// $row=$conn->query("SELECT *FROM users WHERE id= '$id'")->fetch_assoc();
 ?>
    <!doctype html>
     <html lang="uz">
@@ -142,9 +144,9 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
             <input id="rememberCheck" type="checkbox" />
             <label for="rememberCheck" style="color:var(--muted);font-size:13px">Mening barcha qurilmalarimdan chiqib ketilsin</label>
             </div>
-            <div style="display:flex;gap:8px">
-            <button type="button" class="ghost" id="cancel">Bekor qilish</button>
-            <button type="submit" class="primary">Parolni yangilash</button>
+          <div style="display:flex;gap:8px">
+            <button type="button" class="ghost" id="cancel" onclick="window.location.href='../profile.php'">Bekor qilish</button>
+ <button type="submit" class="primary"  >Parolni yangilash</button>
             </div>
         </div>
 

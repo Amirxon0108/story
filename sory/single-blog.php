@@ -3,9 +3,31 @@ require ('header.php');
 require ('users.php');
 $id = $_GET['id'] ?? '';
 $result = $conn->query("SELECT * FROM posts WHERE id = '$id'");
+$res = $conn->query("SELECT * FROM posts ORDER BY id DESC LIMIT 10");
+
+if (isset($_GET['id'])) {
+    $id = (int) $_GET['id'];
+
+   
+    if (empty($_SESSION['viewed_posts'][$id])) {
+        $conn->query("UPDATE posts SET views = views + 1 WHERE id = $id");
+        $_SESSION['viewed_posts'][$id] = true;
+    }
+  }
+  
 ?>
 
 <style>
+  .input-group .form-control {
+  height: 45px;
+}
+
+.input-group .btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .blog-card .card {
   transition: all 0.3s ease;
 }
@@ -14,7 +36,7 @@ $result = $conn->query("SELECT * FROM posts WHERE id = '$id'");
   box-shadow: 0 10px 25px rgba(0,0,0,0.1);
 }
 .blog-card .badge {
-  border-radius: 6px;
+  border-radius: 10px;
   font-size: 0.9rem;
 }
 </style>
@@ -67,11 +89,13 @@ $result = $conn->query("SELECT * FROM posts WHERE id = '$id'");
                            alt="Author" 
                            class="rounded-circle me-3 shadow-sm"
                            width="60" height="60"
-                           style="object-fit: cover;">
+                           style="object-fit: cover; ">
                       <div class="author-details">
                         <span class="fw-bold"><?= htmlspecialchars($row['author_name']) ?></span><br>
-                        <small class="text-muted">🕓 <?= htmlspecialchars($row['created_at'] ?? '') ?></small>
-                      </div>
+                        <small class="text-muted">🕓 <?= date('j M , Y',strtotime($row['created_at'] ?? '')) ?></small> <br>
+                      <p class="text-muted">
+  <i class="bi bi-eye"></i> <?= $row['views'] ?> marta ko‘rilgan
+</p></div>
                     </div>
 
                     <h3 class="fw-bold mb-3"><?= htmlspecialchars($row['title']) ?></h3>
@@ -99,18 +123,26 @@ $result = $conn->query("SELECT * FROM posts WHERE id = '$id'");
       <div class="col-lg-4">
         <div class="widgets-container">
 
-          <!-- Search Widget -->
-          <div class="search-widget widget-item mb-4">
-            <h3 class="widget-title">Search</h3>
-            <form action="">
-              <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search...">
-                <button type="submit" class="btn btn-primary"><i class="bi bi-search"></i></button>
-              </div>
-            </form>
-          </div>
+         
+<!-- Search Widget
+<div class="search-widget widget-item mb-4">
+  <h3 class="widget-title">Search</h3>
+  <form action="">
+    <div class="input-group">
+      <input 
+        type="text" 
+        class="form-control" 
+        placeholder="Search..." 
+        name="q"
+      >
+      <button type="submit" class="btn btn-primary">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </form>
+</div>
 
-          <!-- Categories Widget -->
+          <!-- Categories Widget 
           <div class="categories-widget widget-item mb-4">
             <h3 class="widget-title">Categories</h3>
             <ul class="list-unstyled mt-3">
@@ -121,35 +153,48 @@ $result = $conn->query("SELECT * FROM posts WHERE id = '$id'");
               <li><a href="#">Creative <span>(8)</span></a></li>
               <li><a href="#">Education <span>(14)</span></a></li>
             </ul>
-          </div>
+          </div> -->
 
-          <!-- Recent Posts Widget -->
-          <div class="recent-posts-widget widget-item mb-4">
-            <h3 class="widget-title">Recent Posts</h3>
-            <div class="d-flex flex-column gap-3 mt-3">
-              <div class="d-flex">
-                <img src="assets/img/blog/blog-post-square-1.webp" alt="" width="70" class="rounded me-3">
-                <div>
-                  <h6 class="mb-1"><a href="blog-details.html">Nihil blanditiis at in nihil autem</a></h6>
-                  <small class="text-muted">Jan 1, 2020</small>
-                </div>
-              </div>
-              <div class="d-flex">
-                <img src="assets/img/blog/blog-post-square-2.webp" alt="" width="70" class="rounded me-3">
-                <div>
-                  <h6 class="mb-1"><a href="blog-details.html">Quidem autem et impedit</a></h6>
-                  <small class="text-muted">Jan 1, 2020</small>
-                </div>
-              </div>
-              <div class="d-flex">
-                <img src="assets/img/blog/blog-post-square-3.webp" alt="" width="70" class="rounded me-3">
-                <div>
-                  <h6 class="mb-1"><a href="blog-details.html">Ut maxime similique occaecati</a></h6>
-                  <small class="text-muted">Jan 1, 2020</small>
-                </div>
-              </div>
-            </div>
+        <!-- Recent Posts Widget -->
+<div class="recent-posts-widget widget-item mb-4">
+  <h3 class="widget-title">Recent Posts</h3>
+  <div class="d-flex flex-column gap-3 mt-3">
+    <?php 
+    $count = 0;
+    if($res && $res->num_rows > 0): 
+      while ($row = $res->fetch_assoc()): 
+        if(!empty($row['image'])): 
+    ?>
+        <!-- Har bir post -->
+        <div class="d-flex align-items-center">
+          <img src="../uploads/<?= htmlspecialchars($row['image']) ?>" alt="" width="70" class="rounded me-3" style="width:130px;
+          height:80px">
+          <div>
+            <h6 class="mb-1">
+               <a href="single-blog.php?id=<?= $row['id'] ?>" class="btn-read-more">
+
+                <?= htmlspecialchars(substr($row['title'], 0, 40)) ?>
+              </a>
+            </h6>
+            <small class="text-muted d-block">
+              <?= htmlspecialchars($row["author_name"]) ?>
+            </small>
+            <small class="text-muted">
+              <?= date('j M, Y', strtotime($row['created_at'])) ?>
+            </small>
           </div>
+        </div>
+    <?php 
+          $count++;
+          if($count >= 10) break; 
+        endif;
+      endwhile; 
+    else: 
+    ?>
+      <p class="text-center">Hozircha postlar mavjud emas.</p>
+    <?php endif; ?>
+  </div>
+</div>
 
           <!-- Tags Widget -->
           <div class="tags-widget widget-item">

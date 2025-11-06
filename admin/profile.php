@@ -16,110 +16,188 @@ $email = $_SESSION['email'] ?? 'email@example.com';
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Profil</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 body {
-    font-family: 'Roboto', sans-serif;
-    background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
-    margin: 0; padding: 0;
-    min-height: 100vh;
-    display: flex; justify-content: center; align-items: center;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #333;
 }
+
+/* Profil konteyneri */
 .profile-container {
-    background: #fff0f5;
-    padding: 40px 50px;
-    border-radius: 16px;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-    width: 100%; max-width: 500px;
-    text-align: center;
+  background: #fff;
+  padding: 45px 55px;
+  border-radius: 20px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+  width: 100%;
+  max-width: 480px;
+  text-align: center;
+  transition: 0.4s ease;
 }
+
+.profile-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 18px 45px rgba(0,0,0,0.25);
+}
+
+/* Avatar */
 .profile-avatar {
-    width: 120px; height: 120px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #ff6ec7 0%, #6a11cb 100%);
-    display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 25px; font-size: 3rem; color: #fff; font-weight: 700; text-transform: uppercase;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ff0080 0%, #ff8c00 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 25px;
+  font-size: 3rem;
+  color: #fff;
+  font-weight: 700;
+  text-transform: uppercase;
+  box-shadow: 0 8px 20px rgba(255, 0, 128, 0.4);
 }
+
+/* Sarlavha */
 h1 {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 700; color: #222;
-    margin-bottom: 15px; font-size: 2rem;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 15px;
+  font-size: 2rem;
 }
+
+/* Profil ma’lumotlari */
 .profile-info {
-    background: #ffe4f0; padding: 25px;
-    border-radius: 12px; margin: 25px 0;
-    text-align: left;
+  background: #f5f7ff;
+  padding: 25px;
+  border-radius: 12px;
+  margin: 25px 0;
+  text-align: left;
+  box-shadow: inset 0 0 10px rgba(37, 117, 252, 0.1);
 }
+
 .info-row {
-    display: flex; justify-content: space-between;
-    padding: 12px 0; border-bottom: 1px solid #e0c0de;
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid #e0e0e0;
 }
-.info-row:last-child { border-bottom: none; }
-.info-label { font-weight: 600; color: #555; }
-.info-value { color: #111; font-weight: 500; }
+.info-row:last-child {
+  border-bottom: none;
+}
+.info-label {
+  font-weight: 600;
+  color: #444;
+}
+.info-value {
+  color: #111;
+  font-weight: 500;
+}
 
+/* Tugmalar */
 .action-btns {
-    display: flex; justify-content: space-around; margin-top: 25px; gap: 15px;
-    flex-wrap: wrap;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
 }
+
 .action-btn {
-    padding: 12px 20px;
-    font-size: 1rem; font-weight: 600;
-    border-radius: 12px; text-decoration: none;
-    display: inline-block; transition: all 0.3s ease;
-    color: #fff; width: 48%; text-align: center;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.12);
+  flex: 1;
+  min-width: 47%;
+  text-decoration: none;
+  padding: 12px 15px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #fff;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+  transition: 0.3s;
 }
-.action-btn.avatar { background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%); }
-.action-btn.avatar:hover { background: linear-gradient(135deg, #2575fc 0%, #6a11cb 100%); transform: translateY(-3px); }
 
-.action-btn.password { background: linear-gradient(135deg, #f7971e 0%, #ffd200 100%); color:#111; }
-.action-btn.password:hover { background: linear-gradient(135deg, #ffd200 0%, #f7971e 100%); transform: translateY(-3px); }
+.action-btn.avatar {
+  background: linear-gradient(135deg, #2575fc 0%, #6a11cb 100%);
+}
+.action-btn.avatar:hover {
+  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+  transform: translateY(-3px);
+}
 
+.action-btn.password {
+  background: linear-gradient(135deg, #ff8c00 0%, #ffcc00 100%);
+  color: #222;
+}
+.action-btn.password:hover {
+  background: linear-gradient(135deg, #ffcc00 0%, #ff8c00 100%);
+  transform: translateY(-3px);
+}
+
+/* Logout tugmasi */
 .logout-btn {
-    padding: 12px 20px; font-size: 1rem; font-weight: 600;
-    background: #d90429; border: none; border-radius: 12px;
-    color: #fff; cursor: pointer; transition: all 0.3s ease;
-    text-decoration: none; display: inline-block; margin-top: 20px; width: 100%;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+  display: block;
+  margin-top: 25px;
+  background: linear-gradient(135deg, #ff416c 0%, #ff4b2b 100%);
+  color: #fff;
+  font-weight: 600;
+  padding: 12px;
+  border-radius: 12px;
+  border: none;
+  text-decoration: none;
+  transition: 0.3s;
+  box-shadow: 0 6px 18px rgba(255,65,108,0.4);
 }
-.logout-btn:hover { background: #a6031f; transform: translateY(-3px); }
+.logout-btn:hover {
+  background: linear-gradient(135deg, #ff4b2b 0%, #ff416c 100%);
+  transform: translateY(-3px);
+}
 
 @media (max-width: 480px) {
-    .profile-container { padding: 30px 25px; }
-    .action-btn { width: 100%; }
+  .profile-container {
+    padding: 35px 25px;
+  }
+  .action-btn {
+    width: 100%;
+  }
 }
 </style>
 </head>
 <body>
 
 <div class="profile-container">
-    <div class="profile-avatar">
-        <?= strtoupper(substr($username, 0, 1)) ?>
+  <div class="profile-avatar">
+    <?= strtoupper(substr($username, 0, 1)) ?>
+  </div>
+  
+  <h1>Profil</h1>
+  
+  <div class="profile-info">
+    <div class="info-row">
+      <span class="info-label">Username:</span>
+      <span class="info-value"><?= htmlspecialchars($username) ?></span>
     </div>
-    
-    <h1>Profil</h1>
-    
-    <div class="profile-info">
-        <div class="info-row">
-            <span class="info-label">Username:</span>
-            <span class="info-value"><?= htmlspecialchars($username) ?></span>
-        </div>
-        <div class="info-row">
-            <span class="info-label">Email:</span>
-            <span class="info-value"><?= htmlspecialchars($email ) ?></span>
-        </div>
+    <div class="info-row">
+      <span class="info-label">Email:</span>
+      <span class="info-value"><?= htmlspecialchars($email) ?></span>
     </div>
+  </div>
 
-    <div class="action-btns">
-        <a href="profile/change_image.php" class="action-btn avatar">Profil rasmini yangilash</a>
-        <a href="profile/change_password.php" class="action-btn password">Parolni almashtirish</a>
-    </div>
+  <div class="action-btns">
+    <a href="profile/change_image.php" class="action-btn avatar">Profil rasmini yangilash</a>
+    <a href="profile/change_password.php" class="action-btn password">Parolni almashtirish</a>
+  </div>
 
-    <a href="logout.php" class="logout-btn">Chiqish</a>
+  <a href="logout.php" class="logout-btn">Chiqish</a>
 </div>
 
 </body>

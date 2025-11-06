@@ -15,14 +15,17 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
         header('Location: login-form.php#login');
         exit;
     }
-    $hashed_pass=$pass;
-    $sql="SELECT * FROM users WHERE email = '$email' ";
-    $request=$conn->query($sql);
+     $stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $request = $stmt->get_result();
+
      
     if($request->num_rows>0){
          $user = $request->fetch_assoc();
          if(password_verify($pass, $user['parol'])){
             $_SESSION["user"]=$user;
+              $_SESSION['user_id'] = $user['id']; 
            $_SESSION['user_name'] = $user['user_name'];
         $_SESSION['email'] = $user['email'];
              $_SESSION['logged_in'] = true;
