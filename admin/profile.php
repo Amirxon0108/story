@@ -5,7 +5,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     header("Location: ../login-form.php");
     exit;
 }
-
+$user_id = $_SESSION['user_id'] ?? 0;
 $username = $_SESSION['user_name'] ?? 'Foydalanuvchi';
 $email = $_SESSION['email'] ?? 'email@example.com';
 ?>
@@ -193,7 +193,7 @@ h1 {
   </div>
 
   <div class="action-btns">
-    <a href="profile/change_image.php" class="action-btn avatar">Profil rasmini yangilash</a>
+    <a href="profile/change_image.php" class="action-btn avatar" <?= $user_id?>>Profil rasmini yangilash</a>
     <a href="profile/change_password.php" class="action-btn password">Parolni almashtirish</a>
   </div>
 

@@ -1,5 +1,10 @@
 <?php
 require('../../sory/users.php');
+session_start();
+
+$user_id = $_SESSION['user_id'] ?? 0;
+$username = $_SESSION['user_name'] ?? 'Foydalanuvchi';
+$id =$conn->query("SELECT * FROM users WHERE id = $user_id ")
 ?>
 <!doctype html>
 <html lang="uz">
@@ -207,8 +212,8 @@ require('../../sory/users.php');
         <!-- Without JS we cannot show selected image live.
              This placeholder shows user's initial (manual edit). -->
         <div class="avatar-placeholder" role="img" aria-label="Profil avatar">
-          <span class="initial">A</span>
-          <span class="muted">Oldindan ko‘rish</span>
+          <span class="initial"></span>
+          <span class="muted"><?= substr($username,0,1); ?></span>
         </div>
       </div>
 
@@ -228,46 +233,43 @@ require('../../sory/users.php');
       <div class="small">JPG yoki PNG. Minimal tavsiya: 200×200 px. Brauzerda avtomatik o‘lchash uchun JavaScript kerak bo‘ladi.</div>
     </div>
 
-    <!-- Right: Form -->
+    <!-- Right: Form  -->
     <div class="form-col">
       <h1>Profilni tahrirlash</h1>
 
-      <form action="#" method="post" novalidate>
-        <div class="field">
-          <label for="name">Ismingiz</label>
-          <input id="name" name="name" type="text" class="text-input" placeholder="Ismingizni kiriting " value="" required />
-          <div class="small">Ismingiz 2 dan 50 gacha belgidan iborat bo‘lsin.</div>
-        </div>
+      <form action="image.php" method="post" enctype="multipart/form-data">
+  <div class="field">
+    <label for="name">Ismingiz</label>
+    <input id="name" name="name" type="text" class="text-input" placeholder="<?= htmlspecialchars($username) ?>" value="" required />
+    <div class="small">Ismingiz 2 dan 50 gacha belgidan iborat bo‘lsin.</div>
+  </div>
 
-        <div class="field">
-          <label for="avatarFile">Profil rasmini yuklang</label>
+  <div class="field">
+    <label for="avatarFile">Profil rasmini yuklang</label>
+    <input type="hidden" name="user_id" value="<?= $user_id ?>"> 
 
-          <!-- Hidden native file input (kept accessible) -->
-          <input id="avatarFile" name="image" type="file" accept="image/*" />
+    <input id="avatarFile" name="image" type="file" accept="image/*" />
 
-          <!-- Visible fake file control (label linked to input) -->
-          <div class="filebox" aria-hidden="false">
-            <label for="avatarFile" class="fake-file" tabindex="0">
-              <span style="display:inline-block">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="vertical-align:middle; margin-right:8px">
-                  <path d="M12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8z" stroke="white" stroke-opacity="0.9" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
-                  <path d="M21 21H3" stroke="white" stroke-opacity="0.9" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
-                </svg>
-              </span>
-              <span>Faylni tanlang</span>
-              <span style="margin-left:auto; font-size:13px; opacity:.9">Hech narsa tanlanmagan</span>
-            </label>
-          </div>
-          <div class="small">Siz tanlagan faylni serverga jo‘natish yoki darhol ko‘rsatish uchun JavaScript qo‘shish kerak.</div>
-        </div>
+    <div class="filebox" aria-hidden="false">
+      <label for="avatarFile" class="fake-file" tabindex="0">
+        <span style="display:inline-block">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="vertical-align:middle; margin-right:8px">
+            <path d="M12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8z" stroke="white" stroke-opacity="0.9" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M21 21H3" stroke="white" stroke-opacity="0.9" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </span>
+        <span>Faylni tanlang</span>
+        <span style="margin-left:auto; font-size:13px; opacity:.9">Hech narsa tanlanmagan</span>
+      </label>
+    </div>
+  </div>
 
-        <div class="row">
-          <button type="submit" class="btn-primary">Saqlash</button>
-          <button type="button" class="btn-ghost">Bekor qilish</button>
-        </div>
+  <div class="row">
+    <button type="submit" class="btn-primary">Saqlash</button>
+    <button type="button" class="btn-ghost">Bekor qilish</button>
+  </div>
+</form>
 
-        <div class="meta">Eslatma: Bu sahifa faqat frontend — server taraf va live preview yo‘q. Agar xohlasangiz, men unga JavaScript qo‘shib, faylni darhol oldindan ko‘rsatish (preview) va lokal saqlash funksiyasini ham qo‘shib beraman.</div>
-      </form>
     </div>
   </div>
 </body>

@@ -2,12 +2,17 @@
 
   $title = 'Bosh sahifa';
   require 'header.php';
- 
-require 'users.php';
+  require 'users.php';
+
 $result = $conn->query("SELECT * FROM posts ORDER BY id DESC");
 $res = $conn->query("SELECT * FROM posts WHERE id IN (30,31,32,33,34)");
 
-
+  $results=$conn->query("SELECT * FROM posts ORDER BY id DESC LIMIT 1");
+  $resultb=$conn->query("SELECT * FROM posts WHERE n_type = 'biznes' ORDER BY id DESC LIMIT 1");
+  $resultt=$conn->query("SELECT * FROM posts WHERE n_type = 'Technalogy' ORDER BY id DESC LIMIT 1");
+  $resulti=$conn->query("SELECT * FROM posts WHERE n_type = 'Iqtisodiyot' ORDER BY id DESC LIMIT 1");
+  $resultj=$conn->query("SELECT * FROM posts WHERE n_type = 'Jahon' ORDER BY id DESC LIMIT 1");
+  $resultta=$conn->query("SELECT * FROM posts WHERE n_type = 'Talim' ORDER BY id DESC LIMIT  1");
 ?>
 <style>
 h1 a {
@@ -233,7 +238,7 @@ h1 a:hover {
                 <div class="post-content">
                   <span class="post-category">Design</span>
                   <h4 class="title">
-                    <a href="blog-details.php">Neque porro quisquam est qui dolorem ipsum quia dolor sit amet</a>
+                    <a href="tex.php">Neque porro quisquam est qui dolorem ipsum quia dolor sit amet</a>
                   </h4>
                   <div class="post-meta">
                     <span class="post-date">22 February 2024</span>
@@ -403,137 +408,186 @@ h1 a:hover {
         <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
       </div><!-- End Section Title -->
 
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
+     <div class="container" data-aos="fade-up" data-aos-delay="100">
 
-        <div class="row gy-4 align-items-stretch">
+  <!-- Featured Post -->
+  <?php if($results && $results->num_rows>0): ?>
+    <?php $row = $results->fetch_assoc(); ?>
+    <?php if(!empty($row['image'])): ?>
+      <div class="row gy-4 align-items-stretch">
 
-          <div class="col-lg-7" data-aos="zoom-in" data-aos-delay="150">
-            <article class="featured-post position-relative h-100">
-              <figure class="featured-media m-0">
-                <img src="assets/img/blog/blog-hero-4.webp" alt="Featured post image" class="img-fluid w-100" loading="lazy">
-              </figure>
+        <div class="col-lg-7" data-aos="zoom-in" data-aos-delay="150">
+          <article class="featured-post position-relative h-100">
+            <figure class="featured-media m-0">
+              <img src="../uploads/<?= htmlspecialchars($row['image']) ?>" alt="Featured post image" class="img-fluid w-100" loading="lazy">
+            </figure>
 
-              <div class="featured-content">
-                <div class="date-badge">
-                  <span class="day">12</span>
-                  <span class="mon">Dec</span>
-                </div>
-
-                <span class="cat-badge inverse">Politics</span>
-
-                <h3 class="title">Veritatis maiores natus officiis sit, temporibus alias dicta voluptatum</h3>
-                <p class="excerpt d-none d-md-block">Quisquam perferendis officiis incidunt, facilisis aliquet consectetur lorem luctus. Ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-
-                <div class="meta d-flex align-items-center gap-3">
-                  <div class="d-flex align-items-center">
-                    <i class="bi bi-person"></i><span class="ps-2">Jane Cooper</span>
-                  </div>
-                  <span class="sep">/</span>
-                  <div class="d-flex align-items-center">
-                    <i class="bi bi-folder2"></i><span class="ps-2">Editorial</span>
-                  </div>
-                </div>
-
-                <a href="blog-details.php" class="readmore stretched-link"><span>Continue</span><i class="bi bi-arrow-right"></i></a>
+            <div class="featured-content">
+              <div class="date-badge">
+                <span class="day"><?= date('j', strtotime($row['created_at'])) ?></span>
+                <span class="mon"><?= date('M', strtotime($row['created_at'])) ?></span>
               </div>
-            </article>
-          </div><!-- End Featured Post -->
 
-          <div class="col-lg-5">
-            <div class="row gy-4">
-              <div class="col-12" data-aos="fade-left" data-aos-delay="200">
-                <article class="compact-post h-100">
-                  <div class="thumb">
-                    <img src="assets/img/blog/blog-post-square-2.webp" class="img-fluid" alt="Post thumbnail" loading="lazy">
-                  </div>
-                  <div class="content">
-                    <div class="meta">
-                      <span class="date">05 Aug</span>
-                      <span class="dot">•</span>
-                      <span class="category">Sports</span>
-                    </div>
-                    <h4 class="title">Officia recusandae cumque, dolore asperiores ducimus</h4>
-                    <a href="blog-details.php" class="readmore"><span>Read Article</span><i class="bi bi-arrow-right"></i></a>
-                  </div>
-                </article>
-              </div><!-- End Compact Post -->
+              <span class="cat-badge inverse"><?= htmlspecialchars($row['n_type']) ?></span>
 
-              <div class="col-12" data-aos="fade-left" data-aos-delay="300">
-                <article class="compact-post h-100">
-                  <div class="thumb">
-                    <img src="assets/img/blog/blog-post-square-5.webp" class="img-fluid" alt="Post thumbnail" loading="lazy">
-                  </div>
-                  <div class="content">
-                    <div class="meta">
-                      <span class="date">22 Jan</span>
-                      <span class="dot">•</span>
-                      <span class="category">Economics</span>
-                    </div>
-                    <h4 class="title">Elit pharetra diam quam, pretium tempor iaculis integer</h4>
-                    <a href="blog-details.php" class="readmore"><span>Read Article</span><i class="bi bi-arrow-right"></i></a>
-                  </div>
-                </article>
-              </div><!-- End Compact Post -->
+              <h3 class="title"><?= htmlspecialchars($row['title']) ?></h3>
+              <p class="excerpt d-none d-md-block"><?= htmlspecialchars(substr($row['content'], 0, 150)) ?></p>
+
+              <div class="meta d-flex align-items-center gap-3">
+                <div class="d-flex align-items-center">
+                  <i class="bi bi-person"></i><span class="ps-2"><?= htmlspecialchars($row['author_name']) ?></span>
+                </div>
+                <span class="sep">/</span>
+                <div class="d-flex align-items-center">
+                  <i class="bi bi-folder2"></i><span class="ps-2">news24</span>
+                </div>
+              </div>
+
+              <a href="single-blog.php?id=<?= $row['id'] ?>" class="readmore stretched-link">
+                <span>davomini o'qish</span><i class="bi bi-arrow-right"></i>
+              </a>
             </div>
-          </div><!-- End Right Column -->
-
-          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
-            <article class="card-post h-100">
-              <div class="post-img position-relative overflow-hidden">
-                <img src="assets/img/blog/blog-post-2.webp" class="img-fluid w-100" alt="Post image" loading="lazy">
-              </div>
-              <div class="content">
-                <div class="meta d-flex align-items-center flex-wrap gap-2">
-                  <span class="cat-badge">Economics</span>
-                  <div class="d-flex align-items-center ms-auto">
-                    <i class="bi bi-person"></i><span class="ps-2">Robert Fox</span>
-                  </div>
-                </div>
-                <h3 class="title">Quam impedit minus, cumque aliquam deleniti inventore</h3>
-                <a href="blog-details.php" class="readmore"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
-              </div>
-            </article>
-          </div><!-- End Grid Post -->
-
-          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="250">
-            <article class="card-post h-100">
-              <div class="post-img position-relative overflow-hidden">
-                <img src="assets/img/blog/blog-post-4.webp" class="img-fluid w-100" alt="Post image" loading="lazy">
-              </div>
-              <div class="content">
-                <div class="meta d-flex align-items-center flex-wrap gap-2">
-                  <span class="cat-badge">Travel</span>
-                  <div class="d-flex align-items-center ms-auto">
-                    <i class="bi bi-person"></i><span class="ps-2">Courtney Henry</span>
-                  </div>
-                </div>
-                <h3 class="title">Dicta similique totam, suscipit soluta veritatis perferendis</h3>
-                <a href="blog-details.php" class="readmore"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
-              </div>
-            </article>
-          </div><!-- End Grid Post -->
-
-          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="300">
-            <article class="card-post h-100">
-              <div class="post-img position-relative overflow-hidden">
-                <img src="assets/img/blog/blog-post-6.webp" class="img-fluid w-100" alt="Post image" loading="lazy">
-              </div>
-              <div class="content">
-                <div class="meta d-flex align-items-center flex-wrap gap-2">
-                  <span class="cat-badge">Lifestyle</span>
-                  <div class="d-flex align-items-center ms-auto">
-                    <i class="bi bi-person"></i><span class="ps-2">Wade Warren</span>
-                  </div>
-                </div>
-                <h3 class="title">Natus consequuntur, numquam adipisci cumque facilisis</h3>
-                <a href="blog-details.php" class="readmore"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
-              </div>
-            </article>
-          </div><!-- End Grid Post -->
-
+          </article>
         </div>
+  <?php endif; ?>
+  <?php endif; ?>
+  <!-- End Featured Post -->
 
+  <!-- Right Column -->
+  <div class="col-lg-5">
+    <div class="row gy-4">
+
+      <!-- Iqtisodiyot Post -->
+      <div class="col-12" data-aos="fade-left" data-aos-delay="200">
+        <?php if($resulti && $resulti->num_rows>0): ?>
+          <?php $row = $resulti->fetch_assoc(); ?>
+          <?php if(!empty($row['image'])): ?>
+            <article class="compact-post h-100">
+              <div class="thumb">
+                <img src="../uploads/<?= htmlspecialchars($row['image']) ?>" class="img-fluid" alt="Post thumbnail" loading="lazy">
+              </div>
+              <div class="content">
+                <div class="meta">
+                  <span class="date"><?= date('j M', strtotime($row['created_at'])) ?></span>
+                  <span class="dot">•</span>
+                  <span class="category"><?= htmlspecialchars($row['n_type']) ?></span>
+                </div>
+                <h4 class="title"><?= htmlspecialchars($row['title']) ?></h4>
+                <a href="single-blog.php?id=<?= $row['id'] ?>" class="readmore"><span>Davomini o'qish</span><i class="bi bi-arrow-right"></i></a>
+              </div>
+            </article>
+          <?php endif; ?>
+        <?php else: ?>
+          <p class="text-center">Hozircha postlar mavjud emas.</p>
+        <?php endif; ?>
       </div>
+
+      <!-- Biznes Post -->
+      <div class="col-12" data-aos="fade-left" data-aos-delay="200">
+        <?php if($resultb && $resultb->num_rows>0): ?>
+          <?php $row = $resultb->fetch_assoc(); ?>
+          <?php if(!empty($row['image'])): ?>
+            <article class="compact-post h-100">
+              <div class="thumb">
+                <img src="../uploads/<?= htmlspecialchars($row['image']) ?>" class="img-fluid" alt="Post thumbnail" loading="lazy">
+              </div>
+              <div class="content">
+                <div class="meta">
+                  <span class="date"><?= date('j M', strtotime($row['created_at'])) ?></span>
+                  <span class="dot">•</span>
+                  <span class="category"><?= htmlspecialchars($row['n_type']) ?></span>
+                </div>
+                <h4 class="title"><?= htmlspecialchars($row['title']) ?></h4>
+                <a href="single-blog.php?id=<?= $row['id'] ?>" class="readmore"><span>Davomini o'qish</span><i class="bi bi-arrow-right"></i></a>
+              </div>
+            </article>
+          <?php endif; ?>
+        <?php else: ?>
+          <p class="text-center">Hozircha postlar mavjud emas.</p>
+        <?php endif; ?>
+      </div>
+
+    </div>
+  </div>
+  <!-- End Right Column -->
+
+  <!-- Grid Posts -->
+  <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+    <?php if($resultt && $resultt->num_rows>0): ?>
+      <?php $row = $resultt->fetch_assoc(); ?>
+      <?php if(!empty($row['image'])): ?>
+        <article class="card-post h-100">
+          <div class="post-img position-relative overflow-hidden">
+            <img src="../uploads/<?= htmlspecialchars($row['image']) ?>" class="img-fluid w-100" alt="Post image" loading="lazy">
+          </div>
+          <div class="content">
+            <div class="meta d-flex align-items-center flex-wrap gap-2">
+              <span class="cat-badge"><?= htmlspecialchars($row['n_type']) ?></span>
+              <div class="d-flex align-items-center ms-auto">
+                <i class="bi bi-person"></i><span class="ps-2"><?= htmlspecialchars($row['author_name']) ?></span>
+              </div>
+            </div>
+            <h3 class="title"><?= htmlspecialchars($row['title']) ?></h3>
+            <a href="single-blog.php?id=<?= $row['id'] ?>" class="readmore"><span>Davomini o'qish</span><i class="bi bi-arrow-right"></i></a>
+          </div>
+        </article>
+      <?php endif; ?>
+    <?php else: ?>
+      <p class="text-center">Hozircha postlar mavjud emas.</p>
+    <?php endif; ?>
+  </div>
+
+  <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+    <?php if($resultj && $resultj->num_rows>0): ?>
+      <?php $row = $resultj->fetch_assoc(); ?>
+      <?php if(!empty($row['image'])): ?>
+        <article class="card-post h-100">
+          <div class="post-img position-relative overflow-hidden">
+            <img src="../uploads/<?= htmlspecialchars($row['image']) ?>" class="img-fluid w-100" alt="Post image" loading="lazy">
+          </div>
+          <div class="content">
+            <div class="meta d-flex align-items-center flex-wrap gap-2">
+              <span class="cat-badge"><?= htmlspecialchars($row['n_type']) ?></span>
+              <div class="d-flex align-items-center ms-auto">
+                <i class="bi bi-person"></i><span class="ps-2"><?= htmlspecialchars($row['author_name']) ?></span>
+              </div>
+            </div>
+            <h3 class="title"><?= htmlspecialchars($row['title']) ?></h3>
+            <a href="single-blog.php?id=<?= $row['id'] ?>" class="readmore"><span>Davomini o'qish</span><i class="bi bi-arrow-right"></i></a>
+          </div>
+        </article>
+      <?php endif; ?>
+    <?php else: ?>
+      <p class="text-center">Hozircha postlar mavjud emas.</p>
+    <?php endif; ?>
+  </div>
+
+  <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+    <?php if($resultta && $resultta->num_rows>0): ?>
+      <?php $row = $resultta->fetch_assoc(); ?>
+      <?php if(!empty($row['image'])): ?>
+        <article class="card-post h-100">
+          <div class="post-img position-relative overflow-hidden">
+            <img src="../uploads/<?= htmlspecialchars($row['image']) ?>" class="img-fluid w-100" alt="Post image" loading="lazy">
+          </div>
+          <div class="content">
+            <div class="meta d-flex align-items-center flex-wrap gap-2">
+              <span class="cat-badge"><?= htmlspecialchars($row['n_type']) ?></span>
+              <div class="d-flex align-items-center ms-auto">
+                <i class="bi bi-person"></i><span class="ps-2"><?= htmlspecialchars($row['author_name']) ?></span>
+              </div>
+            </div>
+            <h3 class="title"><?= htmlspecialchars($row['title']) ?></h3>
+            <a href="single-blog.php?id=<?= $row['id'] ?>" class="readmore"><span>Davomini o'qish</span><i class="bi bi-arrow-right"></i></a>
+          </div>
+        </article>
+      <?php endif; ?>
+    <?php else: ?>
+      <p class="text-center">Hozircha postlar mavjud emas.</p>
+    <?php endif; ?>
+  </div>
+
+</div>
 
     </section><!-- /Latest Posts Section -->
 

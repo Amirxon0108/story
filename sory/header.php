@@ -7,7 +7,7 @@ session_start();
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title><?= $title ?? $about ?? $author ?? 'Media24' ?></title>
+  <title><?= $title ?? 'news24' ?></title>
   <meta name="description" content="">
   <meta name="keywords" content="">
 
@@ -38,7 +38,7 @@ session_start();
     <div class="container position-relative d-flex align-items-center justify-content-between">
 
       <a href="index.php" class="logo d-flex align-items-center me-auto me-xl-0">
-        <h1 class="sitename">Story</h1>
+        <h1 class="sitename">news24</h1>
       </a>
 
       <nav id="navmenu" class="navmenu">
