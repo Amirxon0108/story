@@ -236,12 +236,12 @@ h1 a:hover {
                   <img src="assets/img/blog/blog-post-8.webp" alt="" class="img-fluid" loading="lazy">
                 </div>
                 <div class="post-content">
-                  <span class="post-category">Design</span>
+                  <span class="post-category">Texnalogiya</span>
                   <h4 class="title">
-                    <a href="tex.php">Neque porro quisquam est qui dolorem ipsum quia dolor sit amet</a>
+                    <a href="tex.php">Eng so'ngi texnalogikyangiliklarni o'qish uchun ustiga bosing</a>
                   </h4>
                   <div class="post-meta">
-                    <span class="post-date">22 February 2024</span>
+                    <span class="post-date">news24</span>
                   </div>
                 </div>
               </article>
@@ -251,12 +251,12 @@ h1 a:hover {
                   <img src="assets/img/blog/blog-post-4.webp" alt="" class="img-fluid" loading="lazy">
                 </div>
                 <div class="post-content">
-                  <span class="post-category">Business</span>
+                  <span class="post-category">Iqtisodiyot</span>
                   <h4 class="title">
-                    <a href="blog-details.php">Ut enim ad minima veniam quis nostrum exercitationem ullam</a>
+                    <a href="iqtisodiyot.php">Jahon va O'zbekiston iqtisodiyotidagi yangiliklarni bilish uchun ustiga bosing</a>
                   </h4>
                   <div class="post-meta">
-                    <span class="post-date">18 January 2024</span>
+                    <span class="post-date">news24</span>
                   </div>
                 </div>
               </article>
@@ -266,12 +266,12 @@ h1 a:hover {
                   <img src="assets/img/blog/blog-post-1.webp" alt="" class="img-fluid" loading="lazy">
                 </div>
                 <div class="post-content">
-                  <span class="post-category">Lifestyle</span>
+                  <span class="post-category">Jahon</span>
                   <h4 class="title">
-                    <a href="blog-details.php">Excepteur sint occaecat cupidatat non proident sunt in culpa</a>
+                    <a href="jahon.php">Jahoda sodir bo'layotgan yangiliklar</a>
                   </h4>
                   <div class="post-meta">
-                    <span class="post-date">10 December 2023</span>
+                    <span class="post-date">news24</span>
                   </div>
                 </div>
               </article>
@@ -281,12 +281,12 @@ h1 a:hover {
                   <img src="assets/img/blog/blog-post-3.webp" alt="" class="img-fluid" loading="lazy">
                 </div>
                 <div class="post-content">
-                  <span class="post-category">Tech</span>
+                  <span class="post-category">Biznes</span>
                   <h4 class="title">
-                    <a href="blog-details.php">At vero eos et accusamus et iusto odio dignissimos ducimus</a>
+                    <a href="biznes.php">Biznesga doir yangiliklar</a>
                   </h4>
                   <div class="post-meta">
-                    <span class="post-date">5 November 2023</span>
+                    <span class="post-date">news24</span>
                   </div>
                 </div>
               </article>
