@@ -1,7 +1,7 @@
 <?php
 require 'users.php';
 
-$soni = 6;
+$soni = 9;
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $start = $soni * ($page - 1);
 
@@ -15,7 +15,7 @@ $totalPages = ceil($n['total'] / $soni);
 $links = "";
 for ($i = 1; $i <= $totalPages; $i++) {
     $active = ($i == $page) ? "active" : "";
-    $links .= "<li class='$active'><a href='category.php?page=$i'>$i</a></li>";
+    $links .= "<li class='page-item $active'><a class='page-link' href='category.php?page=$i'>$i</a></li>";
 }
 
 $result = $conn->query("SELECT * FROM posts ORDER BY id DESC LIMIT $start, $soni");
@@ -23,6 +23,19 @@ $result = $conn->query("SELECT * FROM posts ORDER BY id DESC LIMIT $start, $soni
 require 'header.php';
 ?>
 <style>
+
+  
+
+  .pagination .page-item.active .page-link {
+    background-color: #0d6efd !important;
+    color: #fff !important;
+    border-color: #0d6efd !important;
+}
+.pagination li.page-item.active a.page-link {
+    background-color: #0d6efd !important;
+    color: #fff !important;
+    border-color: #0d6efd !important;
+}
 .post-img {
   width: 100%;
   height: 200px;
@@ -144,11 +157,21 @@ require 'header.php';
   <section id="pagination-2" class="pagination-2 section">
     <div class="container">
       <div class="d-flex justify-content-center">
-        <ul class="pagination">
-          <li><a href="category.php?page=<?= ($page > 1) ? $page - 1 : 1 ?>"><i class="bi bi-chevron-left"></i></a></li>
-          <?= $links ?>
-          <li><a href="category.php?page=<?= ($page < $totalPages) ? $page + 1 : $totalPages ?>"><i class="bi bi-chevron-right"></i></a></li>
-        </ul>
+          <ul class="pagination">
+    <li class="page-item">
+        <a class="page-link" href="category.php?page=<?= ($page > 1) ? $page - 1 : 1 ?>">
+            <i class="bi bi-chevron-left"></i>
+        </a>
+    </li>
+
+    <?= $links ?>
+
+    <li class="page-item">
+        <a class="page-link" href="category.php?page=<?= ($page < $totalPages) ? $page + 1 : $totalPages ?>">
+            <i class="bi bi-chevron-right"></i>
+        </a>
+    </li>
+</ul>
       </div>
     </div>
   </section>

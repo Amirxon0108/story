@@ -151,7 +151,7 @@ h1 a:hover {
                 <img src="../uploads/<?= htmlspecialchars($row['user_img']) ?>" alt="Author" class="author-avatar">
                 <div class="author-details">
                   <span class="author-name"><?= htmlspecialchars($row['author_name']) ?></span> 
-                      <span class="views"><i class="bi bi-eye"></i> <?= $row['views'] ?>  </span> <span class="publish-date">🕓 <?= date('j M, Y', strtotime($row['created_at'])) ?></span>
+                      <span class="views"><i class="bi bi-eye"></i> <?= $row['views'] ?> marta ko'rilgan </span>  <span class="publish-date">🕓 <?= date('j M, Y', strtotime($row['created_at'])) ?></span>
                 </div>
               </div>
 
@@ -165,7 +165,7 @@ h1 a:hover {
                 </div>
                 <form action="category.php" method="POST">
                   <a href="single-blog.php?id=<?= $row['id'] ?>" class="btn-read-more">
-  <span>Continue Reading</span>
+  <span>Davomini o'qing</span>
   <i class="bi bi-arrow-right"></i>
 </a>
                  </form>
@@ -196,9 +196,9 @@ h1 a:hover {
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
-        <span class="description-title">Category Section</span>
-        <h2>Category Section</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+        <span class="description-title">Bo‘lim Kategoriyasi</span>
+        <h2>Bo‘lim Kategoriyasi</h2>
+        <p>Ushbu bo‘limda siz uchun eng so‘nggi va dolzarb ma’lumotlar jamlangan  </p>
       </div><!-- End Section Title -->
 
       <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -233,12 +233,12 @@ h1 a:hover {
             <div class="sidebar-posts">
               <article class="sidebar-post" data-aos="fade-left" data-aos-delay="300">
                 <div class="post-img">
-                  <img src="assets/img/blog/blog-post-8.webp" alt="" class="img-fluid" loading="lazy">
+                  <img src="../uploads/texnalogiya.jpg" alt="" class="img-fluid" loading="lazy">
                 </div>
                 <div class="post-content">
                   <span class="post-category">Texnalogiya</span>
                   <h4 class="title">
-                    <a href="tex.php">Eng so'ngi texnalogikyangiliklarni o'qish uchun ustiga bosing</a>
+                    <a href="tex.php">Eng so'ngi texnalogik yangiliklar </a>
                   </h4>
                   <div class="post-meta">
                     <span class="post-date">news24</span>
@@ -248,12 +248,12 @@ h1 a:hover {
 
               <article class="sidebar-post" data-aos="fade-left" data-aos-delay="400">
                 <div class="post-img">
-                  <img src="assets/img/blog/blog-post-4.webp" alt="" class="img-fluid" loading="lazy">
+                  <img src="../uploads/iqtisodiyot.webp" alt="" class="img-fluid" loading="lazy">
                 </div>
                 <div class="post-content">
                   <span class="post-category">Iqtisodiyot</span>
                   <h4 class="title">
-                    <a href="iqtisodiyot.php">Jahon va O'zbekiston iqtisodiyotidagi yangiliklarni bilish uchun ustiga bosing</a>
+                    <a href="iqtisodiyot.php">Jahon va O'zbekiston iqtisodiyotidagi yangiliklar</a>
                   </h4>
                   <div class="post-meta">
                     <span class="post-date">news24</span>
@@ -263,7 +263,7 @@ h1 a:hover {
 
               <article class="sidebar-post" data-aos="fade-left" data-aos-delay="500">
                 <div class="post-img">
-                  <img src="assets/img/blog/blog-post-1.webp" alt="" class="img-fluid" loading="lazy">
+                  <img src="../uploads/JahonLogo.png" alt="" class="img-fluid" loading="lazy">
                 </div>
                 <div class="post-content">
                   <span class="post-category">Jahon</span>
@@ -278,7 +278,7 @@ h1 a:hover {
 
               <article class="sidebar-post" data-aos="fade-left" data-aos-delay="600">
                 <div class="post-img">
-                  <img src="assets/img/blog/blog-post-3.webp" alt="" class="img-fluid" loading="lazy">
+                  <img src="../uploads/biznes.jpg" alt="" class="img-fluid" loading="lazy">
                 </div>
                 <div class="post-content">
                   <span class="post-category">Biznes</span>
@@ -290,111 +290,27 @@ h1 a:hover {
                   </div>
                 </div>
               </article>
-            </div>
-          </div>
-        </div>
 
-        <!-- Grid Posts -->
-        <div class="posts-grid">
-          <div class="row gy-4">
-            <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
-              <article class="grid-post">
+               <article class="sidebar-post" data-aos="fade-left" data-aos-delay="600">
                 <div class="post-img">
-                  <img src="assets/img/blog/blog-post-6.webp" alt="" class="img-fluid" loading="lazy">
-                  <div class="post-overlay">
-                    <span class="category-tag">Travel</span>
-                  </div>
+                  <img src="../uploads/talim.png" alt="" class="img-fluid" loading="lazy">
                 </div>
                 <div class="post-content">
-                  <h3 class="title">
-                    <a href="blog-details.php">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum</a>
-                  </h3>
-                  <p class="excerpt">Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
-                  <div class="post-footer">
-                    <div class="author-info">
-                      <img src="assets/img/person/person-f-7.webp" alt="" class="author-img">
-                      <span class="author-name">Sarah K.</span>
-                    </div>
-                    <span class="read-time">3 min read</span>
-                  </div>
-                </div>
-              </article>
-            </div>
-
-            <div class="col-md-6" data-aos="fade-up" data-aos-delay="300">
-              <article class="grid-post">
-                <div class="post-img">
-                  <img src="assets/img/blog/blog-post-2.webp" alt="" class="img-fluid" loading="lazy">
-                  <div class="post-overlay">
-                    <span class="category-tag">Health</span>
-                  </div>
-                </div>
-                <div class="post-content">
-                  <h3 class="title">
-                    <a href="blog-details.php">Magna aliqua ut enim ad minim veniam quis nostrud exercitation</a>
-                  </h3>
-                  <p class="excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.</p>
-                  <div class="post-footer">
-                    <div class="author-info">
-                      <img src="assets/img/person/person-m-12.webp" alt="" class="author-img">
-                      <span class="author-name">David L.</span>
-                    </div>
-                    <span class="read-time">4 min read</span>
-                  </div>
-                </div>
-              </article>
-            </div>
-
-            <div class="col-md-6" data-aos="fade-up" data-aos-delay="400">
-              <article class="grid-post">
-                <div class="post-img">
-                  <img src="assets/img/blog/blog-post-10.webp" alt="" class="img-fluid" loading="lazy">
-                  <div class="post-overlay">
-                    <span class="category-tag">Finance</span>
-                  </div>
-                </div>
-                <div class="post-content">
-                  <h3 class="title">
-                    <a href="blog-details.php">Ullamco laboris nisi ut aliquip ex ea commodo consequat</a>
-                  </h3>
-                  <p class="excerpt">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                  <div class="post-footer">
-                    <div class="author-info">
-                      <img src="assets/img/person/person-f-11.webp" alt="" class="author-img">
-                      <span class="author-name">Emily T.</span>
-                    </div>
-                    <span class="read-time">6 min read</span>
-                  </div>
-                </div>
-              </article>
-            </div>
-
-            <div class="col-md-6" data-aos="fade-up" data-aos-delay="500">
-              <article class="grid-post">
-                <div class="post-img">
-                  <img src="assets/img/blog/blog-post-7.webp" alt="" class="img-fluid" loading="lazy">
-                  <div class="post-overlay">
-                    <span class="category-tag">Education</span>
-                  </div>
-                </div>
-                <div class="post-content">
-                  <h3 class="title">
-                    <a href="blog-details.php">Excepteur sint occaecat cupidatat non proident sunt in culpa qui</a>
-                  </h3>
-                  <p class="excerpt">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
-                  <div class="post-footer">
-                    <div class="author-info">
-                      <img src="assets/img/person/person-m-9.webp" alt="" class="author-img">
-                      <span class="author-name">Alex M.</span>
-                    </div>
-                    <span class="read-time">2 min read</span>
+                  <span class="post-category">Ta'lim</span>
+                  <h4 class="title">
+                    <a href="talim.php">Ta'limdagi bo'layotkan o'zgarishlar va yangiliklar</a>
+                  </h4>
+                  <div class="post-meta">
+                    <span class="post-date">news24</span>
                   </div>
                 </div>
               </article>
             </div>
           </div>
         </div>
-      </div>
+
+        
+     
 
     </section><!-- /Category Section Section -->
 
@@ -403,9 +319,9 @@ h1 a:hover {
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
-        <span class="description-title">Latest Posts</span>
-        <h2>Latest Posts</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+        <span class="description-title">Eng so'ngi yangiliklar</span>
+        <h2>Eng so'ngi yangiliklar</h2>
+        <p>Eng so'ngi yangiliklarni news24 bilan har huni o'qib boring. Eng yangi va Eng ishonchli yangiliklar sayti !</p>
       </div><!-- End Section Title -->
 
      <div class="container" data-aos="fade-up" data-aos-delay="100">

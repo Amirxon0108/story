@@ -1,26 +1,25 @@
 <?php
-require 'users.php';
-require 'header.php';
-$soni = 9;
-$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+require('users.php');
+require('header.php');
+
+$soni= 6;
+$page = isset($_GET['page']) ? (int) $_GET['page'] : 1 ;
 $start = $soni * ($page - 1);
 
+$query = $conn->query("SELECT COUNT(*) as total FROM posts");
+$n=$query->fetch_assoc();
 
-$query = "SELECT COUNT(*) as total FROM posts";
-$n = $conn->query($query)->fetch_assoc();
-
-$totalPages = ceil($n['total'] / $soni);
-
+$total = ceil($n['total'] / $soni );
 
 $links = "";
-for ($i = 1; $i <= $totalPages; $i++) {
-    $active = ($i == $page) ? "active" : "";
-    $links .=  "<li class='page-item $active'>
-            <a class='page-link' href='tex.php?page=$i'>$i</a>
-        </li>";
+for($i = 1; $i<=$total; $i++){
+    $active = $i == $page ? "active" : "";
+    $links .= "<li class='page-items $active' >
+    <a class= 'page-links' href = 'talim.php?page=$i'>$i</a>
+    </li> ";
 }
 
-$result=$conn->query("SELECT * FROM posts WHERE n_type = 'Technalogy' ORDER BY id DESC LIMIT $start, $soni");
+$result= $conn->query("SELECT * FROM posts WHERE n_type = 'Talim' ORDER BY id  DESC LIMIT $start, $soni ");
 
 ?>
 <style>
@@ -174,7 +173,7 @@ $result=$conn->query("SELECT * FROM posts WHERE n_type = 'Technalogy' ORDER BY i
       <div class="d-flex justify-content-center">
        <ul class="pagination">
     <li class="page-item">
-        <a class="page-link" href="tex.php?page=<?= ($page > 1) ? $page - 1 : 1 ?>">
+        <a class="page-link" href="talim.php?page=<?= ($page > 1) ? $page - 1 : 1 ?>">
             <i class="bi bi-chevron-left"></i>
         </a>
     </li>
@@ -182,7 +181,7 @@ $result=$conn->query("SELECT * FROM posts WHERE n_type = 'Technalogy' ORDER BY i
     <?= $links ?>
 
     <li class="page-item">
-        <a class="page-link" href="tex.php?page=<?= ($page < $totalPages) ? $page + 1 : $totalPages ?>">
+        <a class="page-link" href="talim.php?page=<?= ($page < $total) ? $page + 1 : $total ?>">
             <i class="bi bi-chevron-right"></i>
         </a>
     </li>
