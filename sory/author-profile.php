@@ -1,6 +1,13 @@
 <?php
 $author = 'Muallif haqida';
 require 'header.php';
+require 'users.php';
+
+$num = "SELECT COUNT(*) as total FROM posts";
+$total_v=$conn->query($num)->fetch_assoc();
+
+$selected1=$conn->query("SELECT * FROM posts WHERE id=35");
+$selected2=$conn->query("SELECT * FROM posts WHERE id=36");
 ?>
 
 <main class="main">
@@ -44,7 +51,7 @@ require 'header.php';
           <div class="col-lg-4 mb-4 mb-lg-0">
             <div class="author-card" data-aos="fade-up">
               <div class="author-image">
-                <img src="assets/img/person/person-m-5.webp" alt="Muallif" class="img-fluid rounded">
+                <img src="assets/img/person/person-m-55.jpg" alt="Muallif" class="img-fluid rounded">
               </div>
 
               <div class="author-info">
@@ -52,21 +59,19 @@ require 'header.php';
                 <p class="designation">Website muallifi</p>
 
                 <div class="author-bio">
-                  Men o‘z maqolalarimda texnologiya va jamiyat o‘rtasidagi munosabatni yoritaman, 
-                  yangi texnologiyalar bizning kundalik hayotimiz va kelajak imkoniyatlarimizni qanday shakllantirayotganini tahlil qilaman.
-                </div>
+               Maqolalarimda texnologiya va jamiyat o‘rtasidagi bog‘liqlikni yoritaman. Yangi texnologiyalarning kundalik hayotga va kelajak rivojiga ta’siri haqida qisqa, aniq va tahliliy fikrlar beraman.</div>
 
                 <div class="author-stats d-flex justify-content-between text-center my-4">
                   <div class="stat-item">
-                    <h4 data-purecounter-start="0" data-purecounter-end="147" data-purecounter-duration="1" class="purecounter"></h4>
+                    <h4 data-purecounter-start="0" data-purecounter-end="<?= $total_v['total']?>" data-purecounter-duration="1" class="purecounter"></h4>
                     <p>Maqolalar</p>
                   </div>
                   <div class="stat-item">
-                    <h4 data-purecounter-start="0" data-purecounter-end="13" data-purecounter-duration="1" class="purecounter"></h4>
+                    <h4 data-purecounter-start="0" data-purecounter-end="4" data-purecounter-duration="1" class="purecounter"></h4>
                     <p>Mukofotlar</p>
                   </div>
                   <div class="stat-item">
-                    <h4 data-purecounter-start="0" data-purecounter-end="25" data-purecounter-duration="1" class="purecounter">K</h4>
+                    <h4 data-purecounter-start="0" data-purecounter-end="5452" data-purecounter-duration="1" class="purecounter">K</h4>
                     <p>Obunachilar</p>
                   </div>
                 </div>
@@ -89,19 +94,16 @@ require 'header.php';
               </div>
               <div class="content-body">
                 <p>
-                  Texnologiya jurnalistikasi sohasida o‘n yildan ortiq tajribaga egaman. 
-                  Sun’iy intellekt, raqamli xavfsizlik, iste’molchi texnologiyalari va 
-                  ularning jamiyatga ta’siri bo‘yicha ko‘plab tahliliy maqolalar yozganman.
-                </p>
+                 Dasturlash sohasida 2 yildan ortiq tajribaga egaman. Asosiy e’tiborim — sun’iy intellekt, raqamli xavfsizlik, web-texnologiyalar va ular jamiyat hayotiga ko‘rsatayotgan ta’sirni chuqur tahlil qilish. Yaratgan loyihalarim va yozgan maqolalarimda texnologiyalarning kundalik hayotimizni qanday o‘zgartirayotgani, yangi imkoniyatlar yaratishi va kelajakni shakllantirishdagi roli haqida fikr yuritaman. Murakkab texnik jarayonlarni sodda, tushunarli va asosli tarzda izohlash — mening ustunligim.</p>
 
                 <div class="expertise-areas">
                   <h4>Mutaxassislik yo‘nalishlari</h4>
                   <div class="tags">
-                    <span>Sun’iy intellekt</span>
-                    <span>Kiberxavfsizlik</span>
-                    <span>Aqlli uy texnologiyalari</span>
+                    <span>  Web-texnologiyalar </span>
+                
+                    <span> Sun’iy intellekt</span>
                     <span>Raqamli maxfiylik</span>
-                    <span>Iste’molchi elektronikasi</span>
+                 
                     <span>Kelajak texnologiyalari</span>
                   </div>
                 </div>
@@ -110,35 +112,52 @@ require 'header.php';
                   <h4>Tanlangan maqolalar</h4>
                   <div class="row g-4">
                     <div class="col-md-6" data-aos="fade-up" data-aos-delay="300">
-                      <article class="article-card">
+                    <?php if ($selected1 && $selected1->num_rows >0): ?>
+                      <?php while($ro = $selected1->fetch_assoc()):?>
+                      <?php if(!empty($ro['image'])):?>
+                    <article class="article-card">
                         <div class="article-img">
-                          <img src="assets/img/blog/blog-post-1.webp" alt="Maqola" class="img-fluid">
+                          <img src="../uploads/<?= $ro['image']?>" alt="Maqola" class="img-fluid">
                         </div>
                         <div class="article-details">
-                          <div class="post-category">Texnologiya</div>
-                          <h5><a href="#">Sun’iy intellektning kundalik hayotdagi roli</a></h5>
+                          <div class="post-category"><?=$ro['n_type']?></div>
+                          <h5><a href="#"><?= $ro['title'] ?></a></h5>
                           <div class="post-meta">
-                            <span><i class="bi bi-clock"></i> 15-yanvar, 2024</span>
+                            <span><i class="bi bi-clock"></i><?= date(' j M, Y', strtotime($ro['created_at']))?></span>
                             <span><i class="bi bi-chat-dots"></i> 24 ta izoh</span>
                           </div>
                         </div>
                       </article>
+                       <?php endif; ?>
+    <?php endwhile; ?>
+  <?php else: ?>
+    <p class="text-center">Hozircha postlar mavjud emas.</p>
+  <?php endif; ?>
                     </div>
 
                     <div class="col-md-6" data-aos="fade-up" data-aos-delay="400">
-                      <article class="article-card">
+                      
+                   <?php if ($selected2 && $selected2->num_rows >0): ?>
+                      <?php while($ro = $selected2->fetch_assoc()):?>
+                      <?php if(!empty($ro['image'])):?>
+                    <article class="article-card">
                         <div class="article-img">
-                          <img src="assets/img/blog/blog-post-2.webp" alt="Maqola" class="img-fluid">
+                          <img src="../uploads/<?= $ro['image']?>" alt="Maqola" class="img-fluid">
                         </div>
                         <div class="article-details">
-                          <div class="post-category">Maxfiylik</div>
-                          <h5><a href="#">2024-yilda raqamli maxfiylikni tushunish</a></h5>
+                          <div class="post-category"><?=$ro['n_type']?></div>
+                          <h5><a href="#"><?= $ro['title'] ?></a></h5>
                           <div class="post-meta">
-                            <span><i class="bi bi-clock"></i> 3-fevral, 2024</span>
-                            <span><i class="bi bi-chat-dots"></i> 18 ta izoh</span>
+                            <span><i class="bi bi-clock"></i><?= date(' j M, Y', strtotime($ro['created_at']))?></span>
+                            <span><i class="bi bi-chat-dots"></i> 24 ta izoh</span>
                           </div>
                         </div>
                       </article>
+                       <?php endif; ?>
+    <?php endwhile; ?>
+  <?php else: ?>
+    <p class="text-center">Hozircha postlar mavjud emas.</p>
+  <?php endif; ?>
                     </div>
                   </div>
                 </div>
