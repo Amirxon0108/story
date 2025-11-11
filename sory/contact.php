@@ -47,7 +47,7 @@ require ('header.php');
               </div>
               <div class="card-content">
                 <h4>Manzilimiz</h4>
-                <p>4952 Hilltop Dr, Anytown, CA 90210</p>
+                <p>Xorazm, Xazorasp </p>
               </div>
             </div>
 
@@ -57,7 +57,7 @@ require ('header.php');
               </div>
               <div class="card-content">
                 <h4>Elektron pochta</h4>
-                <p>info@example.com</p>
+                <p>amirxonmatchanov07@gmail.com</p>
               </div>
             </div>
 
@@ -67,7 +67,7 @@ require ('header.php');
               </div>
               <div class="card-content">
                 <h4>Telefon raqam</h4>
-                <p>+1 (555) 123-4567</p>
+                <p>+998 94 768 70 08</p>
               </div>
             </div>
 
@@ -85,11 +85,11 @@ require ('header.php');
           <div class="social-links-panel">
             <h5>Bizni kuzating</h5>
             <div class="social-icons">
-              <a href="#"><i class="bi bi-facebook"></i></a>
-              <a href="#"><i class="bi bi-twitter-x"></i></a>
-              <a href="#"><i class="bi bi-instagram"></i></a>
-              <a href="#"><i class="bi bi-linkedin"></i></a>
-              <a href="#"><i class="bi bi-youtube"></i></a>
+              <a href="https://t.me/Amirdevv  "><i class="bi bi-telegram  "></i></a>
+              
+              <a href="https://instagram.com/amirkhan_e17"><i class="bi bi-instagram"></i></a>
+                <a href=""><i class="bi bi-linkedin"></i></a>
+                <a href="https://www.youtube.com/amirdevv "><i class="bi bi-youtube"></i></a>
             </div>
           </div>
         </div>

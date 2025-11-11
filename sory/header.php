@@ -43,20 +43,20 @@ session_start();
 
       <nav id="navmenu" class="navmenu">
         <ul>
-          <li><a href="index.php" class="active">Home</a></li>
-          <li><a href="about.php">About</a></li>
-          <li><a href="category.php">Category</a></li>
-          <li><a href="author-profile.php">Author Profile</a></li>                 
-          <li><a href="contact.php">Contact</a></li>
+          <li><a href="index.php" class="active">Bosh sahifa</a></li>
+          <li><a href="about.php">Biz haqimizda</a></li>
+          <li><a href="category.php">Kategoriya</a></li>
+          <li><a href="author-profile.php">Muallif profili</a></li>                 
+          <li><a href="contact.php">Bog‘lanish</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
 
       <div class="header-social-links">
-        <a href="" class="twitter"><i class="bi bi-twitter-x"></i></a>
-        <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-        <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-        <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+        <a href="https://t.me/Amirdevv  "><i class="bi bi-telegram  "></i></a>
+             <a href="https://instagram.com/amirkhan_e17"><i class="bi bi-instagram"></i></a>
+                
+                <a href="https://www.youtube.com/amirdevv "><i class="bi bi-youtube"></i></a> <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
       </div>
 
       

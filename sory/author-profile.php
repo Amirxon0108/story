@@ -51,7 +51,7 @@ $selected2=$conn->query("SELECT * FROM posts WHERE id=36");
           <div class="col-lg-4 mb-4 mb-lg-0">
             <div class="author-card" data-aos="fade-up">
               <div class="author-image">
-                <img src="assets/img/person/person-m-55.jpg" alt="Muallif" class="img-fluid rounded">
+                <img src="assets/img/person/director.jpg" alt="Muallif" class="img-fluid rounded">
               </div>
 
               <div class="author-info">
@@ -77,11 +77,11 @@ $selected2=$conn->query("SELECT * FROM posts WHERE id=36");
                 </div>
 
                 <div class="social-links">
-                  <a href="#" class="twitter"><i class="bi bi-twitter-x"></i></a>
-                  <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-                  <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-                  <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
-                </div>
+                      <a href="https://t.me/Amirdevv  "><i class="bi bi-telegram  "></i></a>
+             <a href="https://instagram.com/amirkhan_e17"><i class="bi bi-instagram"></i></a>
+                <a href=""><i class="bi bi-linkedin"></i></a>
+                <a href="https://www.youtube.com/amirdevv "><i class="bi bi-youtube"></i></a>
+            </div>
               </div>
             </div>
           </div>

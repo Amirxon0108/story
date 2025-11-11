@@ -3,26 +3,31 @@ require('../../sory/users.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id = $_POST["user_id"];
-    $author_name = $_POST['name'] ?? '';
+    $author_name = $_POST['user_name'] ?? '';
     $imageName = '';
 
     $targetDir = "../../uploads/";
 
-    // Fayl yuborilganini tekshirish
+  
     if (isset($_FILES['image']) && $_FILES['image']['error'] === 0) {
         $originalName = basename($_FILES["image"]["name"]);
         $fileType = strtolower(pathinfo($originalName, PATHINFO_EXTENSION));
         $allowedTypes = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
 
         if (in_array($fileType, $allowedTypes)) {
-            // Fayl nomini noyob qilish
-            $imageName = microtime(true) . "." . $fileType;
+         
+            $imageName = uniqid() . "." . $fileType;
             $path = $targetDir . $imageName;
 
-            // Faylni uploads papkaga saqlash
-            if (move_uploaded_file($_FILES["image"]["tmp_name"], $path)) {
-                // Fayl muvaffaqiyatli saqlandi
-            } else {
+        
+            $query = $conn->query("SELECT imageP FROM users WHERE id = $id");
+            $row = $query->fetch_assoc();
+            if (!empty($row['imageP']) && file_exists($targetDir . $row['imageP'])) {
+                unlink($targetDir . $row['imageP']);
+            }
+
+          
+            if (!move_uploaded_file($_FILES["image"]["tmp_name"], $path)) {
                 echo "Faylni yuklashda xatolik yuz berdi.";
                 exit;
             }
@@ -32,9 +37,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }            
     }
 
-    // Bazaga yangilash
-    $stmt = $conn->prepare("UPDATE users SET imageP = ? WHERE id = ?");
-    $stmt->bind_param('si', $imageName, $id);
+   
+    if ($imageName !== '') {
+      
+        $stmt = $conn->prepare("UPDATE users SET imageP = ?, user_name = ? WHERE id = ?");
+        $stmt->bind_param('ssi', $imageName, $author_name, $id);
+    } else {
+        
+        $stmt = $conn->prepare("UPDATE users SET user_name = ? WHERE id = ?");
+        $stmt->bind_param('si', $author_name, $id);
+    }
 
     if ($stmt->execute()) {
         header('Location: ../profile.php');

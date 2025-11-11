@@ -100,7 +100,7 @@ h1 a:hover {
       <div class="container section-title" data-aos="fade-up">
         <span class="description-title">Eng so'ngi malumotlar</span>
         <h2>Eng so'ngi malumotlar </h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+        <p>Saytimizdagi eng so‘nggi texnologik yangiliklar bilan tanishing.</p>
       </div><!-- End Section Title -->
 
       <div class="container" data-aos="fade-up" data-aos-delay="100">

@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+require('../sory/users.php');
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     header("Location: ../login-form.php");
     exit;
@@ -8,6 +8,12 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
 $user_id = $_SESSION['user_id'] ?? 0;
 $username = $_SESSION['user_name'] ?? 'Foydalanuvchi';
 $email = $_SESSION['email'] ?? 'email@example.com';
+$imageP = $conn->prepare("SELECT imageP FROM users WHERE id = ?");
+$imageP->bind_param("i", $user_id);
+$imageP->execute();
+$image = $imageP->get_result();
+
+
 ?>
 <!DOCTYPE html>
 <html lang="uz">
@@ -34,7 +40,11 @@ body {
   align-items: center;
   color: #333;
 }
-
+.profile-img{
+  width: 150px;
+ height: auto;
+ border-radius: 55px;
+}
 /* Profil konteyneri */
 .profile-container {
   background: #fff;
@@ -174,11 +184,23 @@ h1 {
 </head>
 <body>
 
-<div class="profile-container">
-  <div class="profile-avatar">
-    <?= strtoupper(substr($username, 0, 1)) ?>
-  </div>
-  
+<div class="profile-container"> 
+  <?php if($image && $image->num_rows > 0): ?>
+      <?php while($row = $image->fetch_assoc()): ?>
+          <?php if(!empty($row['imageP'])): ?>
+              <div class="profile-avatar">
+                 <img class="profile-img" src="/Story/uploads/<?= htmlspecialchars($row['imageP'])  ?>" alt="Post rasm" />
+                  <!-- <?= strtoupper(substr($username, 0, 1)) ?> -->
+              <?php
+             
+              ?>
+                </div>
+          <?php endif; ?>
+      <?php endwhile; ?>
+  <?php else: ?>
+      <p class="text-center">Hozircha postlar mavjud emas.</p>
+  <?php endif; ?>
+
   <h1>Profil</h1>
   
   <div class="profile-info">

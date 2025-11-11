@@ -12,12 +12,10 @@ require 'header.php';
         <div class="container">
           <div class="row d-flex justify-content-center text-center">
             <div class="col-lg-8">
-              <h1 class="heading-title">About</h1>
+              <h1 class="heading-title">Biz haqimizda</h1>
               <p class="mb-0">
-                Odio et unde deleniti. Deserunt numquam exercitationem. Officiis quo
-                odio sint voluptas consequatur ut a odio voluptatem. Sit dolorum
-                debitis veritatis natus dolores. Quasi ratione sint. Sit quaerat
-                ipsum dolorem.
+                Bizning jamoamiz — sifatli, zamonaviy va ishonchli raqamli yechimlar yaratishga ixtisoslashgan professional guruh. Maqsadimiz — foydalanuvchilarga qulay, tezkor va zamonaviy xizmatlar taqdim etish, bizneslar uchun esa samarali onlayn platformalar yaratish.
+Har bir loyihaga alohida yondashib, eng kichik detallarigacha e’tibor qaratamiz.
               </p>
             </div>
           </div>
@@ -26,8 +24,8 @@ require 'header.php';
       <nav class="breadcrumbs">
         <div class="container">
           <ol>
-            <li><a href="index.php">Home</a></li>
-            <li class="current">About</li>
+            <li><a href="index.php">Bosh sahifa</a></li>
+            <li class="current">Biz haqimizda</li>
           </ol>
         </div>
       </nav>
@@ -44,18 +42,18 @@ require 'header.php';
               <img src="assets/img/about/about-portrait-2.webp" class="img-fluid" alt="">
             </div>
             <div class="experience-badge" data-aos="fade-up">
-              <h2>12</h2>
-              <p>Years of<br>Experiense</p>
+              <h2>1</h2>
+              <p>yil<br>Tajriba</p>
             </div>
             <div class="projects-badge" data-aos="fade-left">
-              <h2>345+</h2>
-              <p>Projects</p>
+              <h2>8+</h2>
+              <p>Loyihalar</p>
             </div>
           </div>
 
           <div class="col-lg-6" data-aos="fade-left">
-            <h2 class="display-4 fw-bold mb-4">Vestibulum Sagittis Lacinia Augue</h2>
-            <p class="lead mb-4">Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales.</p>
+            <h2 class="display-4 fw-bold mb-4">Barqaror Natija</h2>
+            <p class="lead mb-4">Biz uchun mijozning qoniqishi — eng muhim maqsad. Shu bois barcha loyihalar kelajakda ham barqaror ishlashi uchun optimallashtirilgan.</p>
 
             <div class="features">
               <div class="feature-item mb-4" data-aos="fade-up">
@@ -63,8 +61,8 @@ require 'header.php';
                   <i class="bi bi-rocket-takeoff"></i>
                 </div>
                 <div class="feature-content">
-                  <h4>Pellentesque Dapibus</h4>
-                  <p>Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.</p>
+                  <h4>Veb-sayt yaratuvchi xizmatlar</h4>
+                  <p>Biz mijozlar uchun zamonaviy, tezkor va to‘liq mobil moslashuvchan veb-saytlar yaratamiz. Har bir loyiha uchun alohida dizayn va funksionallik ishlab chiqamiz.</p>
                 </div>
               </div>
 
@@ -73,17 +71,18 @@ require 'header.php';
                   <i class="bi bi-globe2"></i>
                 </div>
                 <div class="feature-content">
-                  <h4>Suspendisse Pulvinar</h4>
-                  <p>Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem.</p>
+                  <h4>Texnik xizmat va qo‘llab-quvvatlash</h4>
+                  <p>Saytingiz doim barqaror ishlashi uchun texnik xizmat, xavfsizlik tekshiruvi va yangilanishlarni muntazam olib boramiz.</p>
                 </div>
               </div>
 
               <ul class="check-list" data-aos="fade-up" data-aos-delay="200">
-                <li><i class="bi bi-check-circle"></i> Phasellus viverra nulla ut metus varius laoreet quisque rutrum aenean.</li>
-                <li><i class="bi bi-check-circle"></i> Etiam ultricies nisi vel augue curabitur ullamcorper ultricies nisi nam.</li>
+                <li><i class="bi bi-check-circle"></i> Saytingiz Google’da tez indekslanishi va yuqori o‘rinlarga ko‘tarilishi uchun professional SEO optimizatsiya qilamiz.</li>
+                <li><i class="bi bi-check-circle"></i>Barcha loyihalarda tezlik va sifatga alohida e’tibor beramiz.
+</li>
               </ul>
 
-              <a href="#" class="btn btn-primary btn-lg mt-4" data-aos="fade-up" data-aos-delay="300">Learn More</a>
+              <a href="contact.php" class="btn btn-primary btn-lg mt-4" data-aos="fade-up" data-aos-delay="300">Bog'lanish</a>
             </div>
           </div>
         </div>
@@ -97,9 +96,9 @@ require 'header.php';
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
-        <span class="description-title">Team</span>
-        <h2>Team</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+        <span class="description-title">Ishonchli jamoa</span>
+        <h2>Ishonchli jamoa</h2>
+        <p>Bizning jamoamiz tajribali dasturchilar, dizaynerlar va texnik mutaxassislardan iborat bo‘lib, har bir loyiha uchun sifat kafolatlanadi.</p>
       </div><!-- End Section Title -->
 
       <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -129,18 +128,21 @@ require 'header.php';
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
             <div class="team-member">
               <div class="member-image">
-                <img src="assets/img/person/person-m-7.webp" class="img-fluid" alt="" loading="lazy">
+                <img src="assets/img/person/director.jpg" class="img-fluid" alt="" loading="lazy">
                 <div class="social-overlay">
                   <div class="social-icons">
-                    <a href="#"><i class="bi bi-linkedin"></i></a>
-                    <a href="#"><i class="bi bi-twitter-x"></i></a>
-                    <a href="#"><i class="bi bi-instagram"></i></a>
-                  </div>
+           
+                     
+            </div> <a href="https://t.me/Amirdevv  "><i class="bi bi-telegram  "></i></a>
+             <a href="https://instagram.com/amirkhan_e17"><i class="bi bi-instagram"></i></a>
+                
+                <a href="https://www.youtube.com/amirdevv "><i class="bi bi-youtube"></i></a>
+                  
                 </div>
               </div>
               <div class="member-info">
-                <h4>Michael Torres</h4>
-                <span>Creative Director</span>
+                <h4>Matchanov Amirxon</h4>
+                <span>Sayt Muallifi</span>
                 <p>Lorem ipsum dolor sit amet consectetur adipiscing elit. Pellentesque habitant morbi tristique senectus et netus.</p>
               </div>
             </div><!-- End Team Member -->
@@ -166,7 +168,7 @@ require 'header.php';
             </div><!-- End Team Member -->
           </div>
 
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+          <!-- <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
             <div class="team-member">
               <div class="member-image">
                 <img src="assets/img/person/person-m-14.webp" class="img-fluid" alt="" loading="lazy">
@@ -184,7 +186,7 @@ require 'header.php';
                 <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur excepteur.</p>
               </div>
             </div><!-- End Team Member -->
-          </div>
+          <!-- </div>
 
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
             <div class="team-member">
@@ -203,7 +205,7 @@ require 'header.php';
                 <span>Marketing Lead</span>
                 <p>Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
               </div>
-            </div><!-- End Team Member -->
+            <!-- </div> End Team Member
           </div>
 
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
@@ -223,7 +225,7 @@ require 'header.php';
                 <span>Software Engineer</span>
                 <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque.</p>
               </div>
-            </div><!-- End Team Member -->
+            </div>End Team Member -->
           </div>
 
         </div>
